@@ -7,6 +7,10 @@
 </main>
 
 <style>
+	main {
+		margin: 0;
+		padding: 0;
+	}
 	#current-date {
 		text-align: center;
 	}

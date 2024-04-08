@@ -1,12 +1,13 @@
 <script>
-	export let btnState = 'start'; // start | end | submit
+	export let bgColor = '#fff201';
+	export let btnText = 'Start Your Day';
 </script>
 
 <main>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div id="button" on:click>
+	<div id="button" style="background-color: {bgColor};" on:click>
 		<img id="pointer-icon" src="./assets/pointer-icon.svg" alt="pointer icon" />
-		<p id="btn-text">Start Your Day</p>
+		<p id="btn-text">{btnText}</p>
 	</div>
 </main>
 
@@ -15,7 +16,6 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		background-color: #fff201;
 		box-shadow: 0 1rem 4rem #bfc01099;
 		margin: 2rem auto;
 		border-radius: 50%;

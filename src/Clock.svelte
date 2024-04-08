@@ -45,10 +45,8 @@
 </main>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Moul&display=swap');
-	/* TODO: text-shadow and imported font not working */
-
 	#clock {
+		margin: 0;
 		text-align: center;
 		font-family: 'Moul', serif;
 		font-size: 15vw;
