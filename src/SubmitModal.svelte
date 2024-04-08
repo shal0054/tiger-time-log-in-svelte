@@ -4,11 +4,7 @@
 
 {#if showModal}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div
-		class="backdrop"
-		class:showModal
-		on:click={() => (showModal = !showModal)}
-	>
+	<div class="backdrop" on:click={() => (showModal = !showModal)}>
 		<div class="modal">
 			<p>Submit Your Day</p>
 		</div>

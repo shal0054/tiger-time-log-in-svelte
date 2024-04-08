@@ -1,13 +1,9 @@
 <script>
-	let dayStartTime = '--';
-	let breakStartTime = '--';
-	let breakEndTime = '--';
-	let dayEndTime = '--';
+	export let dayStartTime = '-:-';
+	export let breakStartTime = '-:-';
+	export let breakEndTime = '-:-';
+	export let dayEndTime = '-:-';
 	let editing = false;
-
-	function editClick() {
-		editing = true;
-	}
 </script>
 
 <main>

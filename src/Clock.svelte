@@ -1,26 +1,14 @@
 <script>
 	let now = new Date();
 	let hours = now.getHours().toString();
-	let formate12 = false;
+	export let formate12;
 	let amPm;
-
-	$: {
-		if (formate12) {
-			hours = now.getHours();
-			hours = hours % 12;
-			hours = hours ? hours : 12; // hour 0 will be 12
-			hours = hours.toString();
-		} else {
-			hours = now.getHours().toString().padStart(2, '0');
-		}
-	}
 
 	setInterval(() => {
 		now = new Date();
 	}, 1000);
 
-	function toggleTimeFormate() {
-		formate12 = !formate12;
+	function toggleClockFormate() {
 		if (formate12) {
 			amPm = hours >= 12 ? 'PM' : 'AM';
 			hours = hours % 12;
@@ -34,7 +22,7 @@
 
 <main>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div id="clock" on:click={toggleTimeFormate}>
+	<div id="clock" on:click on:click={toggleClockFormate}>
 		<span id="current-hours">{hours}</span><span id="colon">:</span><span
 			id="current-minutes">{now.getMinutes().toString().padStart(2, '0')}</span
 		>
