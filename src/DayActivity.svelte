@@ -1,5 +1,8 @@
 <script>
-	let dayStartTime = '9:15 AM';
+	let dayStartTime = '--';
+	let breakStartTime = '--';
+	let breakEndTime = '--';
+	let dayEndTime = '--';
 	let editing = false;
 
 	function editClick() {
@@ -49,7 +52,7 @@
 		</div>
 		<div class="day-entry">
 			<p class="day-item">Break Start:</p>
-			<p class="day-item">12:00 PM</p>
+			<p class="day-item">{breakStartTime}</p>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="16"
@@ -65,7 +68,7 @@
 		</div>
 		<div class="day-entry">
 			<p class="day-item">Break End:</p>
-			<p class="day-item">12:30 PM</p>
+			<p class="day-item">{breakEndTime}</p>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="16"
@@ -81,7 +84,7 @@
 		</div>
 		<div class="day-entry">
 			<p class="day-item">Day End:</p>
-			<p class="day-item">4:30 PM</p>
+			<p class="day-item">{dayEndTime}</p>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="16"

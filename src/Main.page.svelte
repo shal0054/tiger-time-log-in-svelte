@@ -12,8 +12,7 @@
 	let showModal = false;
 	let bgColor = '#fff201';
 	let btnText = 'Start Your Day';
-
-	console.log('btnState on mount:', btnState);
+	let startTimer = false;
 
 	function buttonClick() {
 		// send info for the new state of the button back to the button
@@ -21,16 +20,14 @@
 		// update btnState
 		switch (btnState) {
 			case 'start':
-				console.log('btnState on start:', btnState);
-				// start day timer
+				startTimer = true;
 				bgColor = 'red';
 				btnText = 'End Your Day';
 				dayStartTime = new Date();
 				btnState = 'end';
 				break;
 			case 'end':
-				console.log('btnState on end:', btnState);
-				// pause day timer
+				startTimer = false;
 				// present confirmation modal
 				bgColor = 'green';
 				btnText = 'Submit Your Day';
@@ -38,7 +35,6 @@
 				btnState = 'submit';
 				break;
 			case 'submit':
-				console.log('btnState on submit:', btnState);
 				showModal = true;
 				bgColor = '#FFF201';
 				btnText = 'Start Your Day';
