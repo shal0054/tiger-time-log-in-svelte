@@ -67,6 +67,7 @@
 				bgColor = 'red';
 				btnText = 'End Your Day';
 				dayStartTime = getTime();
+				console.log('start time:', dayStartTime);
 				formateTime();
 				btnState = 'end';
 				break;
