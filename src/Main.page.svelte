@@ -7,8 +7,10 @@
 	import SubmitModal from './SubmitModal.svelte';
 
 	let btnState = 'start'; // start | end | submit
-	let dayStartTime = '-:-';
-	let dayEndTime = '-:-';
+	let dayStartTimeObj;
+	let dayStartTimeStr = '-:-';
+	let dayEndTimeObj;
+	let dayEndTimeStr = '-:-';
 	let showModal = false;
 	let bgColor = '#fff201';
 	let btnText = 'Start Your Day';
@@ -17,43 +19,25 @@
 
 	const toggleTimeFormate = () => {
 		formate12 = !formate12;
-		formateTime();
-	};
-
-	const formateTime = () => {
-		let hours = dayStartTime.split(':')[0];
-		let minutes = dayStartTime.split(':')[1].substring(0, 2).padStart(2, '0');
-		let amPm = dayStartTime.split(':')[1].substring(3, 5);
-		if (formate12 && dayStartTime !== '-:-' && !amPm) {
-			amPm = hours >= 12 ? 'PM' : 'AM';
-			hours = hours % 12;
-			hours = hours ? hours : 12; // hour 0 will be 12
-			hours = hours.toString();
-			dayStartTime = `${hours}:${minutes} ${amPm}`;
-		} else if (!formate12 && dayStartTime !== '-:-' && amPm) {
-			const [timeWithoutPeriod, period] = dayStartTime.split(' ');
-			hours = timeWithoutPeriod.split(':')[0];
-			if (period === 'PM' && hours !== '12') {
-				hours = String(Number(hours) + 12);
-			}
-			if (period === 'AM' && hours === '12') {
-				hours = '00';
-			}
-			dayStartTime = `${hours.padStart(2, '0')}:${minutes}`;
+		if (dayStartTimeObj) {
+			dayStartTimeStr = formateTime(dayStartTimeObj);
+		}
+		if (dayEndTimeObj) {
+			dayEndTimeStr = formateTime(dayEndTimeObj);
 		}
 	};
 
-	const getTime = () => {
-		const now = new Date();
-		let hours;
-		let minutes = now.getMinutes().toString().padStart(2, '0');
-
+	const formateTime = timeObj => {
+		let hours = timeObj.getHours();
+		let minutes = timeObj.getMinutes().toString().padStart(2, '0');
 		if (formate12) {
-			hours = now.getHours();
-			return `${hours}:${minutes}`;
+			let amPm = hours >= 12 ? 'PM' : 'AM';
+			hours = hours % 12;
+			hours = hours ? hours : 12; // hour 0 will be 12
+			hours = hours.toString();
+			return `${hours}:${minutes} ${amPm}`;
 		} else {
-			hours = now.getHours().toString().padStart(2, '0');
-			return `${hours}:${minutes}`;
+			return `${hours.toString().padStart(2, '0')}:${minutes}`;
 		}
 	};
 
@@ -66,9 +50,8 @@
 				startTimer = true;
 				bgColor = 'red';
 				btnText = 'End Your Day';
-				dayStartTime = getTime();
-				console.log('start time:', dayStartTime);
-				formateTime();
+				dayStartTimeObj = new Date();
+				dayStartTimeStr = formateTime(dayStartTimeObj);
 				btnState = 'end';
 				break;
 			case 'end':
@@ -76,7 +59,8 @@
 				// present confirmation modal
 				bgColor = 'green';
 				btnText = 'Submit Your Day';
-				dayEndTime = getTime();
+				dayEndTimeObj = new Date();
+				dayEndTimeStr = formateTime(dayEndTimeObj);
 				btnState = 'submit';
 				break;
 			case 'submit':
@@ -96,7 +80,7 @@
 	<TodaysDate />
 	<Clock on:click={toggleTimeFormate} {formate12} />
 	<Timer {startTimer} />
-	<DayActivity {dayStartTime} {dayEndTime} />
+	<DayActivity {dayStartTimeStr} {dayEndTimeStr} />
 	<Button on:click={buttonClick} {bgColor} {btnText} />
 </main>
 

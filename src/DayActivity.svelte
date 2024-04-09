@@ -1,8 +1,8 @@
 <script>
-	export let dayStartTime = '-:-';
-	export let breakStartTime = '-:-';
-	export let breakEndTime = '-:-';
-	export let dayEndTime = '-:-';
+	export let dayStartTimeStr = '-:-';
+	export let breakStartTimeStr = '-:-';
+	export let breakEndTimeStr = '-:-';
+	export let dayEndTimeStr = '-:-';
 	let editing = false;
 </script>
 
@@ -12,7 +12,7 @@
 		<div class="day-entry">
 			<p class="day-item">Day Start:</p>
 			{#if editing}
-				<input type="text" bind:value={dayStartTime} />
+				<input type="text" bind:value={dayStartTimeStr} />
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@
 					/>
 				</svg>
 			{:else}
-				<p class="day-item">{dayStartTime}</p>
+				<p class="day-item">{dayStartTimeStr}</p>
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +48,7 @@
 		</div>
 		<div class="day-entry">
 			<p class="day-item">Break Start:</p>
-			<p class="day-item">{breakStartTime}</p>
+			<p class="day-item">{breakStartTimeStr}</p>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="16"
@@ -64,7 +64,7 @@
 		</div>
 		<div class="day-entry">
 			<p class="day-item">Break End:</p>
-			<p class="day-item">{breakEndTime}</p>
+			<p class="day-item">{breakEndTimeStr}</p>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="16"
@@ -80,7 +80,7 @@
 		</div>
 		<div class="day-entry">
 			<p class="day-item">Day End:</p>
-			<p class="day-item">{dayEndTime}</p>
+			<p class="day-item">{dayEndTimeStr}</p>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="16"
