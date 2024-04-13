@@ -43,7 +43,7 @@
 
 	function buttonClick() {
 		// send info for the new state of the button back to the button
-		// capture the time the button was clicked and send it to
+		// capture the time the button was clicked and send it to DayActivity
 		// update btnState
 		switch (btnState) {
 			case 'start':

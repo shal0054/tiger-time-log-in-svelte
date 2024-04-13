@@ -1,13 +1,25 @@
 <script>
 	export let startTimer;
-	let timer = '00:00:00';
+	let timerStr = '00:00:00';
+	let timer;
 	let totalSeconds = 0;
 
-	if (startTimer) {
-		console.log('StartTimer');
-		setInterval(countTimer, 1000);
-	} else {
-		clearInterval(timer);
+	$: {
+		if (startTimer) {
+			console.log('Timer Stared');
+			clearTimer(false);
+		} else {
+			console.log('Timer Stopped');
+			clearTimer(true);
+		}
+	}
+
+	function clearTimer(stop) {
+		if (stop) {
+			clearInterval(timer);
+		} else {
+			timer = setInterval(countTimer, 1000);
+		}
 	}
 
 	function countTimer() {
@@ -18,14 +30,14 @@
 		if (hour < 10) hour = '0' + hour;
 		if (minute < 10) minute = '0' + minute;
 		if (seconds < 10) seconds = '0' + seconds;
-		timer = hour + ':' + minute + ':' + seconds;
+		timerStr = hour + ':' + minute + ':' + seconds;
 	}
 </script>
 
 <main>
 	<div id="worked-hours" {startTimer}>
 		<p>Total work hours today:</p>
-		<p id="timer">{timer}</p>
+		<p id="timer">{timerStr}</p>
 	</div>
 </main>
 
