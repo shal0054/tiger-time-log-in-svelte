@@ -13,6 +13,7 @@
 	let dayEndTimeStr = '-:-';
 	let showModal = false;
 	let bgColor = '#fff201';
+	let shadowColor = '#bfc01099';
 	let btnText = 'Start Your Day';
 	let startTimer = false;
 	let formate12 = false;
@@ -49,6 +50,7 @@
 			case 'start':
 				startTimer = true;
 				bgColor = 'red';
+				shadowColor = '#c0101099';
 				btnText = 'End Your Day';
 				dayStartTimeObj = new Date();
 				dayStartTimeStr = formateTime(dayStartTimeObj);
@@ -58,6 +60,7 @@
 				startTimer = false;
 				// present confirmation modal
 				bgColor = 'green';
+				shadowColor = '#10c01099';
 				btnText = 'Submit Your Day';
 				dayEndTimeObj = new Date();
 				dayEndTimeStr = formateTime(dayEndTimeObj);
@@ -66,6 +69,7 @@
 			case 'submit':
 				showModal = true;
 				bgColor = '#FFF201';
+				shadowColor = '#bfc01099';
 				btnText = 'Start Your Day';
 				// submitDay();
 				btnState = 'start';
@@ -81,7 +85,7 @@
 	<Clock on:click={toggleTimeFormate} {formate12} />
 	<Timer {startTimer} />
 	<DayActivity {dayStartTimeStr} {dayEndTimeStr} />
-	<Button on:click={buttonClick} {bgColor} {btnText} />
+	<Button on:click={buttonClick} {bgColor} {btnText} {shadowColor} />
 </main>
 
 <style>
