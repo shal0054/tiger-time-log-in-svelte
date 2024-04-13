@@ -5,6 +5,7 @@
 	import DayActivity from './DayActivity.svelte';
 	import Button from './Button.svelte';
 	import SubmitModal from './SubmitModal.svelte';
+	import Nav from './Nav.svelte';
 
 	let btnState = 'start'; // start | end | submit
 	let dayStartTimeObj;
@@ -86,6 +87,7 @@
 	<Timer {startTimer} />
 	<DayActivity {dayStartTimeStr} {dayEndTimeStr} />
 	<Button on:click={buttonClick} {bgColor} {btnText} {shadowColor} />
+	<Nav />
 </main>
 
 <style>
