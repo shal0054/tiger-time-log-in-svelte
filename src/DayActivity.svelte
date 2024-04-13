@@ -10,7 +10,7 @@
 	<div id="day-activity">
 		<h3>My Day's Activity</h3>
 		<div class="day-entry">
-			<p class="day-item">Day Start:</p>
+			<p class="day-item">Start Day:</p>
 			{#if editing}
 				<input type="text" bind:value={dayStartTimeStr} />
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
