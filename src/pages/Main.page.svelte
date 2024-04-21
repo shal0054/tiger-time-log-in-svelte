@@ -10,12 +10,12 @@
 
 	let btnState = 'start'; // start | end | submit
 	let dayStartTimeObj;
-	let dayStartTimeStr = '-:-';
 	let dayEndTimeObj;
-	let dayEndTimeStr = '-:-';
+	let dayEntryText;
+	let dayEntryTime;
 	let showModal = false;
-	let bgColor = '#fff201';
-	let shadowColor = '#bfc01099';
+	let bgColor = '#FFF201';
+	let shadowColor = '#BFC01099';
 	let btnText = 'Start Your Day';
 	let startTimer = false;
 	let formate12 = false;
@@ -28,14 +28,14 @@
 	const toggleTimeFormate = () => {
 		formate12 = !formate12;
 		if (dayStartTimeObj) {
-			dayStartTimeStr = formateTime(dayStartTimeObj);
+			dayEntryTime = formateTime(dayStartTimeObj);
 		}
 		if (dayEndTimeObj) {
-			dayEndTimeStr = formateTime(dayEndTimeObj);
+			dayEntryTime = formateTime(dayEndTimeObj);
 		}
 	};
 
-	const formateTime = timeObj => {
+	function formateTime(timeObj) {
 		let hours = timeObj.getHours();
 		let minutes = timeObj.getMinutes().toString().padStart(2, '0');
 		if (formate12) {
@@ -47,7 +47,7 @@
 		} else {
 			return `${hours.toString().padStart(2, '0')}:${minutes}`;
 		}
-	};
+	}
 
 	function buttonClick() {
 		// send info for the new state of the button back to the button
@@ -57,32 +57,38 @@
 			case 'start':
 				startTimer = true;
 				bgColor = 'red';
-				shadowColor = '#c0101099';
+				shadowColor = '#C0101099';
 				btnText = 'End Your Day';
+				dayEntryText = 'Start Day:';
 				dayStartTimeObj = new Date();
-				dayStartTimeStr = formateTime(dayStartTimeObj);
+				dayEntryTime = formateTime(dayStartTimeObj);
 				btnState = 'end';
 				break;
 			case 'end':
 				startTimer = false;
 				// present confirmation modal
 				bgColor = 'green';
-				shadowColor = '#10c01099';
+				shadowColor = '#10C01099';
 				btnText = 'Submit Your Day';
+				dayEntryText = 'Start End:';
 				dayEndTimeObj = new Date();
-				dayEndTimeStr = formateTime(dayEndTimeObj);
+				dayEntryTime = formateTime(dayEndTimeObj);
 				btnState = 'submit';
 				break;
 			case 'submit':
 				showModal = true;
 				bgColor = '#FFF201';
-				shadowColor = '#bfc01099';
+				shadowColor = '#BfC01099';
 				btnText = 'Start Your Day';
+				dayEntryText = '';
+				dayEntryTime = '';
 				// submitDay();
 				btnState = 'start';
 				break;
 		}
 	}
+
+	$: console.log(dayEntryText, dayEntryTime);
 </script>
 
 <SubmitModal {showModal} />
@@ -91,7 +97,7 @@
 	<TodaysDate />
 	<Clock on:click={toggleTimeFormate} {formate12} />
 	<Timer {startTimer} />
-	<DayActivity {dayStartTimeStr} {dayEndTimeStr} />
+	<DayActivity {dayEntryText} {dayEntryTime} />
 	<div class="btn-container">
 		<Button on:click={buttonClick} {bgColor} {btnText} {shadowColor} />
 		<BreakBtn />

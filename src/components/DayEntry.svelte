@@ -1,13 +1,15 @@
 <script>
-	export let dayItemTimeStr = '-:-';
-	export let dayItemTxt = 'Start Day:';
+	export let text;
+	export let time;
 	export let editing = false;
+
+	$: console.log(text, time);
 </script>
 
 <div class="day-entry">
-	<p class="day-item">{dayItemTxt}</p>
+	<p class="day-item">{text}</p>
 	{#if editing}
-		<input type="text" bind:value={dayItemTimeStr} />
+		<input type="text" bind:value={time} />
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +26,7 @@
 			/>
 		</svg>
 	{:else}
-		<p class="day-item">{dayItemTimeStr}</p>
+		<p class="day-item">{time}</p>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

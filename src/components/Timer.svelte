@@ -6,10 +6,10 @@
 
 	$: {
 		if (startTimer) {
-			console.log('Timer Stared');
+			// console.log('Timer Stared');
 			clearTimer(false);
 		} else {
-			console.log('Timer Stopped');
+			// console.log('Timer Stopped');
 			clearTimer(true);
 		}
 	}
