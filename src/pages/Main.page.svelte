@@ -1,11 +1,12 @@
 <script>
-	import TodaysDate from './TodaysDate.svelte';
-	import Clock from './Clock.svelte';
-	import Timer from './Timer.svelte';
-	import DayActivity from './DayActivity.svelte';
-	import Button from './Button.svelte';
-	import SubmitModal from './SubmitModal.svelte';
-	import Nav from './Nav.svelte';
+	import TodaysDate from '../components/TodaysDate.svelte';
+	import Clock from '../components/Clock.svelte';
+	import Timer from '../components/Timer.svelte';
+	import DayActivity from '../components/DayActivity.svelte';
+	import Button from '../components/Button.svelte';
+	import SubmitModal from '../SubmitModal.svelte';
+	import Nav from '../components/Nav.svelte';
+	import BreakBtn from '../components/BreakBtn.svelte';
 
 	let btnState = 'start'; // start | end | submit
 	let dayStartTimeObj;
@@ -18,6 +19,11 @@
 	let btnText = 'Start Your Day';
 	let startTimer = false;
 	let formate12 = false;
+	let activeTab = 'home';
+
+	function tabChange(ev) {
+		activeTab = ev.detail;
+	}
 
 	const toggleTimeFormate = () => {
 		formate12 = !formate12;
@@ -86,9 +92,17 @@
 	<Clock on:click={toggleTimeFormate} {formate12} />
 	<Timer {startTimer} />
 	<DayActivity {dayStartTimeStr} {dayEndTimeStr} />
-	<Button on:click={buttonClick} {bgColor} {btnText} {shadowColor} />
-	<Nav />
+	<div class="btn-container">
+		<Button on:click={buttonClick} {bgColor} {btnText} {shadowColor} />
+		<BreakBtn />
+	</div>
+	<Nav {activeTab} on:tabChange={tabChange} />
 </main>
 
 <style>
+	.btn-container {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+	}
 </style>

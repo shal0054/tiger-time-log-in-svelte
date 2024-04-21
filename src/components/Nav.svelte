@@ -1,43 +1,59 @@
-<script></script>
+<script>
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+	export let activeTab;
+</script>
 
 <nav>
 	<div class="container">
-		<span
-			><svg
+		<span>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<svg
+				id="home"
 				xmlns="http://www.w3.org/2000/svg"
 				width="16"
 				height="16"
 				fill="currentColor"
 				class="bi bi-house-door"
+				class:active={activeTab === 'home'}
 				viewBox="0 0 16 16"
+				on:click={() => dispatch('tabChange', 'home')}
 			>
 				<path
 					d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"
 				/>
 			</svg></span
 		>
-		<span
-			><svg
+		<span>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<svg
+				id="profile"
 				xmlns="http://www.w3.org/2000/svg"
 				width="16"
 				height="16"
 				fill="currentColor"
 				class="bi bi-person"
+				class:active={activeTab === 'profile'}
 				viewBox="0 0 16 16"
+				on:click={() => dispatch('tabChange', 'profile')}
 			>
 				<path
 					d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"
 				/>
 			</svg></span
 		>
-		<span
-			><svg
+		<span>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<svg
+				id="settings"
 				xmlns="http://www.w3.org/2000/svg"
 				width="16"
 				height="16"
 				fill="currentColor"
 				class="bi bi-gear"
+				class:active={activeTab === 'settings'}
 				viewBox="0 0 16 16"
+				on:click={() => dispatch('tabChange', 'settings')}
 			>
 				<path
 					d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"
@@ -52,7 +68,7 @@
 
 <style>
 	nav {
-		position: absolute;
+		position: fixed;
 		bottom: 1.8rem;
 		margin-right: auto;
 		margin-left: auto;
@@ -67,5 +83,10 @@
 
 	svg {
 		transform: scale(2.5);
+	}
+
+	.active {
+		filter: drop-shadow(0 0 6px rgba(191, 192, 16, 0.6));
+		color: rgb(255, 242, 1);
 	}
 </style>

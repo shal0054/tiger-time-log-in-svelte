@@ -21,7 +21,6 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		/* box-shadow: 0 1rem 4rem #bfc01099; */
 		margin: 2rem auto;
 		border-radius: 50%;
 		height: 35vw;
