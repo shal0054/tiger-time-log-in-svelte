@@ -29,20 +29,17 @@
 		font-family: 'Moul', serif;
 		font-weight: 700;
 	}
-
 	#pointer-icon {
 		width: 40%;
 		margin-top: 1rem;
 	}
-
 	#btn-text {
 		font-size: 60%;
 		margin: 0;
 		padding: 0;
 	}
-
 	#button:active {
-		background-color: white;
+		background-color: rgba(192, 192, 16, 0.6) !important;
 		scale: 0.9;
 		font-size: 55%;
 	}

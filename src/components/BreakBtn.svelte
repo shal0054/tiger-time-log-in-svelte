@@ -22,9 +22,13 @@
 		height: 15vw;
 		width: 15vw;
 	}
-
 	#break-icon {
 		transform: scale(1.8);
+		width: 32%;
 		margin: 1.2rem auto;
+	}
+	#break-btn:active {
+		background-color: rgba(192, 192, 16, 0.6) !important;
+		scale: 0.9;
 	}
 </style>
