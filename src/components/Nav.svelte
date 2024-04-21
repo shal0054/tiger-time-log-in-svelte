@@ -69,11 +69,14 @@
 <style>
 	nav {
 		position: fixed;
-		bottom: 1.8rem;
+		bottom: 0;
 		margin-right: auto;
 		margin-left: auto;
+		padding-top: 2rem;
 		left: 0px;
 		right: 0px;
+		background-color: white;
+		height: 3rem;
 	}
 
 	.container {
@@ -86,7 +89,7 @@
 	}
 
 	.active {
-		filter: drop-shadow(0 0 6px rgba(191, 192, 16, 0.6));
+		filter: drop-shadow(0 0 8px rgba(192, 192, 16, 0.6));
 		color: rgb(255, 242, 1);
 	}
 </style>

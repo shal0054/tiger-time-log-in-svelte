@@ -87,8 +87,6 @@
 				break;
 		}
 	}
-
-	$: console.log(dayEntryText, dayEntryTime);
 </script>
 
 <SubmitModal {showModal} />

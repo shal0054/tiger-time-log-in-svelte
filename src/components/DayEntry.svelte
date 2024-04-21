@@ -2,8 +2,6 @@
 	export let text;
 	export let time;
 	export let editing = false;
-
-	$: console.log(text, time);
 </script>
 
 <div class="day-entry">

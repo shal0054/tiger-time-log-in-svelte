@@ -21,7 +21,7 @@
 	<div id="day-activity">
 		<h3>My Day's Activity</h3>
 		{#each dayEntryList as dayEntry}
-			<DayEntry text={dayEntry.text} time={dayEntry.time} />
+			<DayEntry {...dayEntry} />
 		{:else}
 			<p>Day Not Started</p>
 		{/each}
