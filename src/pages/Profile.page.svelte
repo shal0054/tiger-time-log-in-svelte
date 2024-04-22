@@ -22,7 +22,11 @@
 		</span>
 		<span class="profile-text">Karim Shaloh</span>
 		<span>
-			<img class="icon" src="./assets/edit-fill-icon.png" alt="Edit Icon" />
+			<img
+				class="icon edit-icon"
+				src="./assets/edit-fill-icon.png"
+				alt="Edit Icon"
+			/>
 		</span>
 	</div>
 	<div class="profile-item">
@@ -31,7 +35,11 @@
 		</span>
 		<span class="profile-text">Driver</span>
 		<span>
-			<img class="icon" src="./assets/edit-fill-icon.png" alt="Edit Icon" />
+			<img
+				class="icon edit-icon"
+				src="./assets/edit-fill-icon.png"
+				alt="Edit Icon"
+			/>
 		</span>
 	</div>
 	<div class="profile-item">
@@ -40,7 +48,7 @@
 		</span>
 		<span class="profile-text">kshaloh@gianttiger.com</span>
 		<!-- <span>
-			<img class="icon" src="./assets/edit-fill-icon.png" alt="Edit Icon" />
+			<img class="icon edit-icon" src="./assets/edit-fill-icon.png" alt="Edit Icon" />
 		</span> -->
 	</div>
 	<div class="profile-item">
@@ -49,7 +57,11 @@
 		</span>
 		<span class="profile-text">(613) 305-9648</span>
 		<span>
-			<img class="icon" src="./assets/edit-fill-icon.png" alt="Edit Icon" />
+			<img
+				class="icon edit-icon"
+				src="./assets/edit-fill-icon.png"
+				alt="Edit Icon"
+			/>
 		</span>
 	</div>
 	<Nav {activeTab} on:tabChange={tabChange} />
