@@ -4,7 +4,7 @@
 	import Profile from './pages/Profile.page.svelte';
 
 	export let loggedIn = true;
-	export let profile = false;
+	export let profile = true;
 </script>
 
 <main>

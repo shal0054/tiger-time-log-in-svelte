@@ -27,12 +27,6 @@
 
 	const toggleTimeFormate = () => {
 		formate12 = !formate12;
-		if (dayStartTimeObj) {
-			dayEntryTime = formateTime(dayStartTimeObj);
-		}
-		if (dayEndTimeObj) {
-			dayEntryTime = formateTime(dayEndTimeObj);
-		}
 	};
 
 	function formateTime(timeObj) {

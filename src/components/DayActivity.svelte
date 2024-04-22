@@ -4,7 +4,6 @@
 	export let dayEntryText;
 	export let dayEntryTime;
 
-	let editing = false;
 	let dayEntryList = [];
 
 	$: {
@@ -118,17 +117,5 @@
 		font-size: larger;
 		width: 80%;
 		margin: auto;
-	}
-	.day-entry {
-		display: flex;
-		justify-content: space-around;
-		border-bottom: 0.5px solid #bfc01099;
-	}
-	.bi-pencil,
-	.bi-floppy {
-		margin: auto 0;
-	}
-	input {
-		width: 6rem;
 	}
 </style>

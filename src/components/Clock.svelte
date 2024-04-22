@@ -1,7 +1,7 @@
 <script>
+	export let formate12;
 	let now = new Date();
 	let hours = now.getHours().toString();
-	export let formate12;
 	let amPm;
 
 	setInterval(() => {
@@ -23,8 +23,8 @@
 <main>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div id="clock" on:click on:click={toggleClockFormate}>
-		<span id="current-hours">{hours}</span><span id="colon">:</span><span
-			id="current-minutes">{now.getMinutes().toString().padStart(2, '0')}</span
+		<span id="current-hours">{hours}:</span><span id="current-minutes"
+			>{now.getMinutes().toString().padStart(2, '0')}</span
 		>
 		{#if formate12}
 			<span id="am-pm">{amPm}</span>

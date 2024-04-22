@@ -89,7 +89,7 @@
 	}
 
 	.active {
-		filter: drop-shadow(0 0 8px rgba(192, 192, 16, 0.6));
-		color: rgb(255, 242, 1);
+		filter: drop-shadow(0 0 8px black);
+		color: #fff201;
 	}
 </style>
