@@ -5,10 +5,10 @@
 	import History from './pages/History.page.svelte';
 	import Settings from './pages/Settings.page.svelte';
 
-	export let loggedIn = true;
-	export let profile = false;
+	export let loggedIn = false;
+	export let profile = true;
 	export let history = false;
-	export let settings = true;
+	export let settings = false;
 </script>
 
 <main>

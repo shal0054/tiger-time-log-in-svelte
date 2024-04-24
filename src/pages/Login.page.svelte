@@ -1,10 +1,29 @@
 <script>
 	const logo = 'assets/GTLogo-Desktop-EN.svg';
-	let username;
-	let password;
+	let creds = { username: '', password: '' };
+	let errors = { username: '', password: '' };
+	let credsValid = false;
 
-	function getLoginValues() {
-		console.log(username, password);
+	function login() {
+		console.log(creds.username, creds.password);
+	}
+
+	function validateCreds() {
+		credsValid = true;
+
+		if (creds.username.trim().length === 0) {
+			credsValid = false;
+			errors.username = "Username can't be blank!";
+		} else errors.username = '';
+
+		if (creds.password.trim().length === 0) {
+			credsValid = false;
+			errors.username = "Password can't be blank!";
+		} else errors.password = '';
+
+		if (credsValid) {
+			login();
+		}
 	}
 
 	function toggleHidePassword() {
@@ -44,13 +63,14 @@
 <main>
 	<div id="login-mobile-side">
 		<img id="login-logo-mobile" src={logo} alt="" />
-		<p id="hint-text">Login into your account</p>
+		<p id="hint-text">Login in to clock in!</p>
 		<form>
 			<label for="username" class="form-label">Email</label>
+			<div class="error">{errors.username}</div>
 			<div id="username-input-div" class="">
 				<input
 					type="text"
-					bind:value={username}
+					bind:value={creds.username}
 					class="form-control"
 					id="username"
 					autocomplete="username"
@@ -67,10 +87,11 @@
 			<br />
 			<br />
 			<label for="password" class="form-label">Password</label>
+			<div class="error">{errors.password}</div>
 			<div class="input-group">
 				<input
 					type="password"
-					bind:value={password}
+					bind:value={creds.password}
 					class="form-control"
 					id="password"
 					autocomplete="current-password"
@@ -93,7 +114,7 @@
 			<button
 				class="fs-4"
 				id="login-btn"
-				on:click|preventDefault={getLoginValues}>Login now</button
+				on:click|preventDefault={validateCreds}>Login now</button
 			>
 		</form>
 	</div>
@@ -136,6 +157,12 @@
 	input {
 		height: 4em;
 		margin: 0;
+	}
+
+	.error {
+		font-weight: bold;
+		font-size: smaller;
+		color: red;
 	}
 
 	#usernamePrepend {
