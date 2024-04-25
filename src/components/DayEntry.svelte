@@ -2,12 +2,51 @@
 	export let text;
 	export let time;
 	export let editing = false;
+	let hours = time.split(':')[0];
+	let minutes = time.split(':')[1];
+	let errors = { hours: '', minutes: '' };
+	let timeValid = false;
+	let minBorder = 'normal solid black';
+	let hourBorder = 'normal solid black';
+
+	const setTime = () => {
+		timeValid = true;
+
+		if (!hours) {
+			timeValid = false;
+			errors.hours = "Hours can't be blank";
+			hourBorder = 'medium solid red';
+		} else if (hours < 0 || hours > 23) {
+			timeValid = false;
+			errors.hours = 'Hours are out of range';
+			hourBorder = 'medium solid red';
+		} else errors.hours = '';
+
+		if (!minutes) {
+			timeValid = false;
+			errors.minutes = "Minutes can't be blank";
+			minBorder = 'medium solid red';
+		} else if (minutes < 0 || minutes > 59) {
+			timeValid = false;
+			errors.minutes = 'Minutes are out of range';
+			minBorder = 'medium solid red';
+		} else errors.minutes = '';
+
+		if (timeValid) {
+			time = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+			editing = false;
+		}
+	};
 </script>
 
+<div class="error">{errors.hours}</div>
+<div class="error">{errors.minutes}</div>
 <div class="day-entry">
 	<p class="day-item">{text}</p>
 	{#if editing}
-		<input type="text" bind:value={time} />
+		<input type="number" bind:value={hours} style="border: {hourBorder};" />
+		<span>:</span>
+		<input type="number" bind:value={minutes} style="border: {minBorder};" />
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +55,7 @@
 			fill="currentColor"
 			class="bi bi-floppy"
 			viewBox="0 0 16 16"
-			on:click={() => (editing = false)}
+			on:click={setTime}
 		>
 			<path d="M11 2H9v3h2z" />
 			<path
@@ -55,6 +94,13 @@
 		margin: auto 0;
 	}
 	input {
-		width: 6rem;
+		width: 3rem;
+		height: fit-content;
+	}
+	.error {
+		font-weight: bold;
+		font-size: smaller;
+		color: red;
+		margin: 1rem auto;
 	}
 </style>
