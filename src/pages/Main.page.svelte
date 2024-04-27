@@ -102,5 +102,5 @@
 		display: flex;
 		justify-content: center;
 		gap: 1rem;
-	}
+		margin-bottom: 4rem;	}
 </style>
