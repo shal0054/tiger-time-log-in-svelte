@@ -4,7 +4,7 @@
 	import Timer from '../components/Timer.svelte';
 	import DayActivity from '../components/DayActivity.svelte';
 	import Button from '../components/Button.svelte';
-	import SubmitModal from '../SubmitModal.svelte';
+	import SubmitModal from '../components/SubmitModal.svelte';
 	import Nav from '../components/Nav.svelte';
 	import BreakBtn from '../components/BreakBtn.svelte';
 

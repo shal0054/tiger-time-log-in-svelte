@@ -31,6 +31,7 @@
 	.backdrop {
 		width: 100%;
 		height: 100%;
+		top: 0;
 		position: fixed;
 		background-color: rgba(0, 0, 0, 0.7);
 		text-align: center;
@@ -40,8 +41,8 @@
 	.modal {
 		padding: 10px;
 		border-radius: 10px;
-		max-width: 80%;
-		margin: 35% auto;
+		max-width: 76%;
+		margin: 25% auto;
 		background-color: white;
 	}
 </style>
