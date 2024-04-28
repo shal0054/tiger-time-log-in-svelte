@@ -53,7 +53,7 @@
 				bgColor = 'red';
 				shadowColor = '#C0101099';
 				btnText = 'End Your Day';
-				dayEntryText = 'Start Day:';
+				dayEntryText = 'Day Start:';
 				dayStartTimeObj = new Date();
 				dayEntryTime = formateTime(dayStartTimeObj);
 				btnState = 'end';
@@ -64,7 +64,7 @@
 				bgColor = 'green';
 				shadowColor = '#10C01099';
 				btnText = 'Submit Your Day';
-				dayEntryText = 'Start End:';
+				dayEntryText = 'Day End:';
 				dayEndTimeObj = new Date();
 				dayEntryTime = formateTime(dayEndTimeObj);
 				btnState = 'submit';
