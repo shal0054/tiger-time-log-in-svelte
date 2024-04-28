@@ -98,9 +98,13 @@
 </main>
 
 <style>
+	main {
+		z-index: -1;
+	}
 	.btn-container {
 		display: flex;
 		justify-content: center;
 		gap: 1rem;
-		margin-bottom: 4rem;	}
+		margin-bottom: 4rem;
+	}
 </style>

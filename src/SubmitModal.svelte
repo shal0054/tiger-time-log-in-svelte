@@ -34,6 +34,7 @@
 		position: fixed;
 		background-color: rgba(0, 0, 0, 0.7);
 		text-align: center;
+		z-index: 1;
 	}
 
 	.modal {

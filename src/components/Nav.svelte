@@ -96,6 +96,7 @@
 		right: 0px;
 		background-color: white;
 		height: 3rem;
+		z-index: 0;
 	}
 
 	.container {
