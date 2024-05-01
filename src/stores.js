@@ -3,7 +3,7 @@ import { writable } from 'svelte/store';
 export const times = writable({
 	dayStartTimeObj: '',
 	dayEndTimeObj: '',
-	formateTime: timeObj => {
+	formateTime: (timeObj, formate12) => {
 		let hours = timeObj.getHours();
 		let minutes = timeObj.getMinutes().toString().padStart(2, '0');
 		if (formate12) {

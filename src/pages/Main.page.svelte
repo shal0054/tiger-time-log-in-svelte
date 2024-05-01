@@ -37,20 +37,20 @@
 				shadowColor = '#C0101099';
 				btnText = 'End Your Day';
 				times.set({ ...$times, dayStartTimeObj: new Date() });
-				dayEntry = 'start'; // $times.formateTime($times.dayStartTimeObj);
+				dayEntry = 'start';
 				btnState = 'end';
-				// activate break button
+				// TODO: activate break button
 				break;
 			case 'end':
 				startTimer.set(false);
-				// present confirmation modal
+				// TODO: present confirmation modal
 				bgColor = 'green';
 				shadowColor = '#10C01099';
 				btnText = 'Submit Your Day';
 				times.set({ ...$times, dayEndTimeObj: new Date() });
-				dayEntry = 'end'; // $times.formateTime($times.dayEndTimeObj);
+				dayEntry = 'end';
 				btnState = 'submit';
-				// deactivate break button
+				// TODO: deactivate break button
 				break;
 			case 'submit':
 				showModal = true;
@@ -58,7 +58,7 @@
 				shadowColor = '#BfC01099';
 				btnText = 'Start Your Day';
 				dayEntry = '';
-				// submitDay();
+				// submitDay(); // submit to firebase and reset variables
 				btnState = 'start';
 				break;
 		}
