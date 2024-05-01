@@ -6,3 +6,5 @@ export const times = writable({
 });
 
 export const formate12 = writable(false);
+export const startTimer = writable(false);
+export const totalSecondsWorked = writable(0);

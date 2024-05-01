@@ -7,7 +7,7 @@
 	import SubmitModal from '../components/SubmitModal.svelte';
 	import Nav from '../components/Nav.svelte';
 	import BreakBtn from '../components/BreakBtn.svelte';
-	import { times, formate12 } from '../stores';
+	import { times, formate12, startTimer } from '../stores';
 
 	let btnState = 'start'; // start | end | submit
 	let dayEntryText;
@@ -16,7 +16,6 @@
 	let bgColor = '#FFF201';
 	let shadowColor = '#BFC01099';
 	let btnText = 'Start Your Day';
-	let startTimer = false;
 	let activeTab = 'home';
 
 	function tabChange(ev) {
@@ -48,7 +47,7 @@
 		// update btnState
 		switch (btnState) {
 			case 'start':
-				startTimer = true;
+				startTimer.set(true);
 				bgColor = 'red';
 				shadowColor = '#C0101099';
 				btnText = 'End Your Day';
@@ -58,7 +57,7 @@
 				btnState = 'end';
 				break;
 			case 'end':
-				startTimer = false;
+				startTimer.set(false);
 				// present confirmation modal
 				bgColor = 'green';
 				shadowColor = '#10C01099';
@@ -87,7 +86,7 @@
 <main>
 	<TodaysDate />
 	<Clock on:click={toggleTimeFormate} />
-	<Timer {startTimer} />
+	<Timer />
 	<DayActivity {dayEntryText} {dayEntryTime} />
 	<div class="btn-container">
 		<Button on:click={buttonClick} {bgColor} {btnText} {shadowColor} />
