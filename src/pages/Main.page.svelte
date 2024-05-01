@@ -10,8 +10,7 @@
 	import { times, formate12, startTimer } from '../stores';
 
 	let btnState = 'start'; // start | end | submit
-	let dayEntryText;
-	let dayEntryTime;
+	let dayEntry; // start | end
 	let showModal = false;
 	let bgColor = '#FFF201';
 	let shadowColor = '#BFC01099';
@@ -37,9 +36,8 @@
 				bgColor = 'red';
 				shadowColor = '#C0101099';
 				btnText = 'End Your Day';
-				dayEntryText = 'Day Start:';
 				times.set({ ...$times, dayStartTimeObj: new Date() });
-				dayEntryTime = $times.formateTime($times.dayStartTimeObj);
+				dayEntry = 'start'; // $times.formateTime($times.dayStartTimeObj);
 				btnState = 'end';
 				// activate break button
 				break;
@@ -49,9 +47,8 @@
 				bgColor = 'green';
 				shadowColor = '#10C01099';
 				btnText = 'Submit Your Day';
-				dayEntryText = 'Day End:';
 				times.set({ ...$times, dayEndTimeObj: new Date() });
-				dayEntryTime = $times.formateTime($times.dayEndTimeObj);
+				dayEntry = 'end'; // $times.formateTime($times.dayEndTimeObj);
 				btnState = 'submit';
 				// deactivate break button
 				break;
@@ -60,8 +57,7 @@
 				bgColor = '#FFF201';
 				shadowColor = '#BfC01099';
 				btnText = 'Start Your Day';
-				dayEntryText = '';
-				dayEntryTime = '';
+				dayEntry = '';
 				// submitDay();
 				btnState = 'start';
 				break;
@@ -75,7 +71,7 @@
 	<TodaysDate />
 	<Clock on:click={toggleTimeFormate} />
 	<Timer />
-	<DayActivity {dayEntryText} {dayEntryTime} />
+	<DayActivity {dayEntry} />
 	<div class="btn-container">
 		<Button on:click={buttonClick} {bgColor} {btnText} {shadowColor} />
 		<BreakBtn />

@@ -1,16 +1,27 @@
 <script>
 	import DayEntry from './DayEntry.svelte';
+	import { times } from '../stores';
 
-	export let dayEntryText;
-	export let dayEntryTime;
+	export let dayEntry;
 
 	let dayEntryList = [];
 
 	$: {
-		if (dayEntryText) {
+		if (dayEntry === 'start') {
 			dayEntryList = [
 				...dayEntryList,
-				{ text: dayEntryText, time: dayEntryTime },
+				{
+					text: 'Day Start:',
+					time: $times.formateTime($times.dayStartTimeObj),
+				},
+			];
+		} else if (dayEntry === 'end') {
+			dayEntryList = [
+				...dayEntryList,
+				{
+					text: 'Day End:',
+					time: $times.formateTime($times.dayEndTimeObj),
+				},
 			];
 		}
 	}

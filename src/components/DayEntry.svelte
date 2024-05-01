@@ -87,8 +87,6 @@
 		justify-content: space-around;
 		border-bottom: 0.5px solid #bfc01099;
 	}
-	.day-item {
-	}
 	.bi-pencil,
 	.bi-floppy {
 		margin: auto 0;
