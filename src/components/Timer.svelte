@@ -10,14 +10,11 @@
 	}
 
 	function clearTimer(stop) {
-		if (stop) {
-			clearInterval(timer);
-		} else {
-			timer = setInterval(countTimer, 1000);
-		}
+		if (stop) clearInterval(timer);
+		else timer = setInterval(timerCount, 1000);
 	}
 
-	function countTimer() {
+	function timerCount() {
 		totalSecondsWorked.set(++$totalSecondsWorked);
 		let hour = Math.floor($totalSecondsWorked / 3600);
 		let minute = Math.floor(($totalSecondsWorked - hour * 3600) / 60);
@@ -30,7 +27,7 @@
 </script>
 
 <main>
-	<div id="worked-hours" {startTimer}>
+	<div id="worked-hours">
 		<p>Total work hours today:</p>
 		<p id="timer">{timerStr}</p>
 	</div>

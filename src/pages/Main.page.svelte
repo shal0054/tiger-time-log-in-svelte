@@ -27,20 +27,6 @@
 		else formate12.set(true);
 	};
 
-	function formateTime(timeObj) {
-		let hours = timeObj.getHours();
-		let minutes = timeObj.getMinutes().toString().padStart(2, '0');
-		if (formate12) {
-			let amPm = hours >= 12 ? 'PM' : 'AM';
-			hours = hours % 12;
-			hours = hours ? hours : 12; // hour 0 will be 12
-			hours = hours.toString();
-			return `${hours}:${minutes} ${amPm}`;
-		} else {
-			return `${hours.toString().padStart(2, '0')}:${minutes}`;
-		}
-	}
-
 	function buttonClick() {
 		// send info for the new state of the button back to the button
 		// capture the time the button was clicked and send it to DayActivity
@@ -53,8 +39,9 @@
 				btnText = 'End Your Day';
 				dayEntryText = 'Day Start:';
 				times.set({ ...$times, dayStartTimeObj: new Date() });
-				dayEntryTime = formateTime($times.dayStartTimeObj);
+				dayEntryTime = $times.formateTime($times.dayStartTimeObj);
 				btnState = 'end';
+				// activate break button
 				break;
 			case 'end':
 				startTimer.set(false);
@@ -64,8 +51,9 @@
 				btnText = 'Submit Your Day';
 				dayEntryText = 'Day End:';
 				times.set({ ...$times, dayEndTimeObj: new Date() });
-				dayEntryTime = formateTime($times.dayEndTimeObj);
+				dayEntryTime = $times.formateTime($times.dayEndTimeObj);
 				btnState = 'submit';
+				// deactivate break button
 				break;
 			case 'submit':
 				showModal = true;

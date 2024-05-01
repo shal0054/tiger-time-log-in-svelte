@@ -1,5 +1,19 @@
 <script>
+	import { times } from '../stores';
+
 	export let showModal = false;
+
+	let startTimeStr;
+	let endTimeStr;
+
+	$: {
+		startTimeStr = $times.dayStartTimeObj
+			? $times.formateTime($times.dayStartTimeObj)
+			: '-:-';
+		endTimeStr = $times.dayEndTimeObj
+			? $times.formateTime($times.dayEndTimeObj)
+			: '-:-';
+	}
 </script>
 
 {#if showModal}
@@ -11,9 +25,9 @@
 			</header>
 			<body>
 				<h4>Start time:</h4>
-				<p>-:-</p>
+				<p>{startTimeStr}</p>
 				<h4>End time:</h4>
-				<p>-:-</p>
+				<p>{endTimeStr}</p>
 				<h4>breaks:</h4>
 				<p>-:-</p>
 				<h4>Total hours:</h4>
