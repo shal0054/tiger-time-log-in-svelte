@@ -10,8 +10,6 @@
 	import { times, formate12 } from '../stores';
 
 	let btnState = 'start'; // start | end | submit
-	let dayStartTimeObj;
-	let dayEndTimeObj;
 	let dayEntryText;
 	let dayEntryTime;
 	let showModal = false;
@@ -55,8 +53,8 @@
 				shadowColor = '#C0101099';
 				btnText = 'End Your Day';
 				dayEntryText = 'Day Start:';
-				dayStartTimeObj = new Date();
-				dayEntryTime = formateTime(dayStartTimeObj);
+				times.set({ ...$times, dayStartTimeObj: new Date() });
+				dayEntryTime = formateTime($times.dayStartTimeObj);
 				btnState = 'end';
 				break;
 			case 'end':
@@ -66,8 +64,8 @@
 				shadowColor = '#10C01099';
 				btnText = 'Submit Your Day';
 				dayEntryText = 'Day End:';
-				dayEndTimeObj = new Date();
-				dayEntryTime = formateTime(dayEndTimeObj);
+				times.set({ ...$times, dayEndTimeObj: new Date() });
+				dayEntryTime = formateTime($times.dayEndTimeObj);
 				btnState = 'submit';
 				break;
 			case 'submit':
