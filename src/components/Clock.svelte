@@ -1,5 +1,6 @@
 <script>
-	export let formate12;
+	import { times, formate12 } from '../stores';
+
 	let now = new Date();
 	let hours = now.getHours().toString();
 	let amPm;
@@ -9,7 +10,7 @@
 	}, 1000);
 
 	function toggleClockFormate() {
-		if (formate12) {
+		if ($formate12) {
 			amPm = hours >= 12 ? 'PM' : 'AM';
 			hours = hours % 12;
 			hours = hours ? hours : 12; // hour 0 will be 12
@@ -26,7 +27,7 @@
 		<span id="current-hours">{hours}:</span><span id="current-minutes"
 			>{now.getMinutes().toString().padStart(2, '0')}</span
 		>
-		{#if formate12}
+		{#if $formate12}
 			<span id="am-pm">{amPm}</span>
 		{/if}
 	</div>

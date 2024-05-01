@@ -7,6 +7,7 @@
 	import SubmitModal from '../components/SubmitModal.svelte';
 	import Nav from '../components/Nav.svelte';
 	import BreakBtn from '../components/BreakBtn.svelte';
+	import { times, formate12 } from '../stores';
 
 	let btnState = 'start'; // start | end | submit
 	let dayStartTimeObj;
@@ -18,7 +19,6 @@
 	let shadowColor = '#BFC01099';
 	let btnText = 'Start Your Day';
 	let startTimer = false;
-	let formate12 = false;
 	let activeTab = 'home';
 
 	function tabChange(ev) {
@@ -26,7 +26,8 @@
 	}
 
 	const toggleTimeFormate = () => {
-		formate12 = !formate12;
+		if ($formate12) formate12.set(false);
+		else formate12.set(true);
 	};
 
 	function formateTime(timeObj) {
@@ -87,7 +88,7 @@
 
 <main>
 	<TodaysDate />
-	<Clock on:click={toggleTimeFormate} {formate12} />
+	<Clock on:click={toggleTimeFormate} />
 	<Timer {startTimer} />
 	<DayActivity {dayEntryText} {dayEntryTime} />
 	<div class="btn-container">
