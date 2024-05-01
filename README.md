@@ -5,9 +5,9 @@
 
 # To run on your local machine:
 ```
-git clone
-https://github.com/shal0054/tiger-time-log-in-svelte npm install cd
-tiger-time-log-in-svelte npm run dev
+git clone https://github.com/shal0054/tiger-time-log-in-svelte
+npm install
+cd tiger-time-log-in-svelte npm run dev
 ```
 Don't forget the [Svelte VS Code Plugin](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
 
