@@ -2,39 +2,26 @@
 	import DayEntry from './DayEntry.svelte';
 	import { times, formate12 } from '../stores';
 
-	export let dayEntry;
-
-	let dayEntryList = [];
-
-	$: {
-		if (dayEntry === 'start') {
-			dayEntryList = [
-				...dayEntryList,
-				{
-					text: 'Day Start:',
-					time: $times.formateTime($times.dayStartTimeObj, $formate12),
-				},
-			];
-		} else if (dayEntry === 'end') {
-			dayEntryList = [
-				...dayEntryList,
-				{
-					text: 'Day End:',
-					time: $times.formateTime($times.dayEndTimeObj, $formate12),
-				},
-			];
-		}
-	}
+	console.log($times.dayStartTimeObj);
 </script>
 
 <main>
 	<div id="day-activity">
 		<h3>My Day's Activity</h3>
-		{#each dayEntryList as dayEntry}
-			<DayEntry {...dayEntry} />
-		{:else}
+		{#if !$times.dayStartTimeObj}
 			<p>Day Not Started</p>
-		{/each}
+		{:else}
+			<DayEntry
+				text={'Day Start:'}
+				time={$times.formateTime($times.dayStartTimeObj, $formate12)}
+			/>
+		{/if}
+		{#if $times.dayEndTimeObj}
+			<DayEntry
+				text={'Day End:'}
+				time={$times.formateTime($times.dayEndTimeObj, $formate12)}
+			/>
+		{/if}
 	</div>
 </main>
 

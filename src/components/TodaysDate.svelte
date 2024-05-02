@@ -8,8 +8,7 @@
 
 <style>
 	main {
-		margin: 0;
-		padding: 0;
+		padding-top: 1.4rem;
 	}
 	#current-date {
 		text-align: center;

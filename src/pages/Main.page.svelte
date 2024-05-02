@@ -37,18 +37,18 @@
 				shadowColor = '#C0101099';
 				btnText = 'End Your Day';
 				times.set({ ...$times, dayStartTimeObj: new Date() });
-				dayEntry = 'start';
+				// dayEntry = 'start';
 				btnState = 'end';
 				// TODO: activate break button
 				break;
 			case 'end':
 				startTimer.set(false);
-				// TODO: present confirmation modal
+				// TODO: present a confirmation modal
 				bgColor = 'green';
 				shadowColor = '#10C01099';
 				btnText = 'Submit Your Day';
 				times.set({ ...$times, dayEndTimeObj: new Date() });
-				dayEntry = 'end';
+				// dayEntry = 'end';
 				btnState = 'submit';
 				// TODO: deactivate break button
 				break;
@@ -57,7 +57,7 @@
 				bgColor = '#FFF201';
 				shadowColor = '#BfC01099';
 				btnText = 'Start Your Day';
-				dayEntry = '';
+				// dayEntry = '';
 				// submitDay(); // submit to firebase and reset variables
 				btnState = 'start';
 				break;
@@ -71,7 +71,7 @@
 	<TodaysDate />
 	<Clock on:click={toggleTimeFormate} />
 	<Timer />
-	<DayActivity {dayEntry} />
+	<DayActivity />
 	<div class="btn-container">
 		<Button on:click={buttonClick} {bgColor} {btnText} {shadowColor} />
 		<BreakBtn />
