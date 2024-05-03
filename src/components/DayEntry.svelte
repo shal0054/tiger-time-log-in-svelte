@@ -6,7 +6,6 @@
 	let hours = time.split(':')[0];
 	let minutes = time.split(':')[1].slice(0, 2);
 	let amPm = time.slice(-1) === 'M' ? time.slice(-2) : '';
-	$: console.log($formate12, amPm);
 	let errors = { hours: '', minutes: '' };
 	let timeValid = false;
 	let minBorder = 'normal solid black';
@@ -38,6 +37,15 @@
 		if (timeValid) {
 			time = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 			editing = false;
+			let d = new Date();
+			let newTime = `${d.toDateString()} ${time}`;
+			if (text === 'Day Start:') {
+				times.set({ ...$times, dayStartTimeObj: new Date(newTime) });
+			} else if (text === 'Day End:') {
+				times.set({ ...$times, dayEndTimeObj: new Date(newTime) });
+			}
+			console.log($times.dayStartTimeObj);
+			console.log($times.dayEndTimeObj);
 		}
 	};
 </script>
@@ -52,6 +60,9 @@
 			<span id="time-colon">:</span>
 			<input type="number" bind:value={minutes} style="border: {minBorder};" />
 			{#if $formate12}
+				{(hours = hours % 12)}
+				{(hours = hours ? hours : 12)}
+				<!-- hour 0 will be 12 -->
 				<select bind:value={amPm}>
 					<option value="AM" selected={amPm === 'AM'}>AM</option>
 					<option value="PM" selected={amPm === 'PM'}>PM</option>
