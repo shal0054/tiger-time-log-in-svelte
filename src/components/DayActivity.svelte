@@ -1,8 +1,6 @@
 <script>
 	import DayEntry from './DayEntry.svelte';
 	import { times, formate12 } from '../stores';
-
-	console.log($times.dayStartTimeObj);
 </script>
 
 <main>

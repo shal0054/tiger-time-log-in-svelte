@@ -5,7 +5,8 @@
 	export let editing = false;
 	let hours = time.split(':')[0];
 	let minutes = time.split(':')[1].slice(0, 2);
-	let amPm = time.slice(-2);
+	let amPm = time.slice(-1) === 'M' ? time.slice(-2) : '';
+	$: console.log($formate12, amPm);
 	let errors = { hours: '', minutes: '' };
 	let timeValid = false;
 	let minBorder = 'normal solid black';
@@ -24,7 +25,7 @@
 			hourBorder = 'medium solid red';
 		} else errors.hours = '';
 
-		if (!minutes) {
+		if (!minutes && minutes != 0) {
 			timeValid = false;
 			errors.minutes = "Minutes can't be blank";
 			minBorder = 'medium solid red';
@@ -50,6 +51,12 @@
 			<input type="number" bind:value={hours} style="border: {hourBorder};" />
 			<span id="time-colon">:</span>
 			<input type="number" bind:value={minutes} style="border: {minBorder};" />
+			{#if $formate12}
+				<select bind:value={amPm}>
+					<option value="AM">AM</option>
+					<option value="PM">PM</option>
+				</select>
+			{/if}
 		</div>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<svg
