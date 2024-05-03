@@ -53,8 +53,8 @@
 			<input type="number" bind:value={minutes} style="border: {minBorder};" />
 			{#if $formate12}
 				<select bind:value={amPm}>
-					<option value="AM">AM</option>
-					<option value="PM">PM</option>
+					<option value="AM" selected={amPm === 'AM'}>AM</option>
+					<option value="PM" selected={amPm === 'PM'}>PM</option>
 				</select>
 			{/if}
 		</div>
