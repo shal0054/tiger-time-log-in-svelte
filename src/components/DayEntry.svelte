@@ -1,9 +1,11 @@
 <script>
+	import { times, formate12 } from '../stores';
 	export let text;
 	export let time;
 	export let editing = false;
 	let hours = time.split(':')[0];
-	let minutes = time.split(':')[1];
+	let minutes = time.split(':')[1].slice(0, 2);
+	let amPm = time.slice(-2);
 	let errors = { hours: '', minutes: '' };
 	let timeValid = false;
 	let minBorder = 'normal solid black';
@@ -12,7 +14,7 @@
 	const setUpdatedTime = () => {
 		timeValid = true;
 
-		if (!hours) {
+		if (!hours && hours != 0) {
 			timeValid = false;
 			errors.hours = "Hours can't be blank";
 			hourBorder = 'medium solid red';
