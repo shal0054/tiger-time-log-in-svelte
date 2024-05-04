@@ -24,6 +24,16 @@
 			hourBorder = 'medium solid red';
 		} else errors.hours = '';
 
+		if ($formate12 && hours > 12) {
+			timeValid = false;
+			errors.hours = "Hours can't be greater than 12";
+			hourBorder = 'medium solid red';
+		} else if ($formate12 && hours < 1) {
+			timeValid = false;
+			errors.hours = "Hours can't be less than 1";
+			hourBorder = 'medium solid red';
+		} else errors.hours = '';
+
 		if (!minutes && minutes != 0) {
 			timeValid = false;
 			errors.minutes = "Minutes can't be blank";
@@ -35,19 +45,37 @@
 		} else errors.minutes = '';
 
 		if (timeValid) {
-			time = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 			editing = false;
+			let newTimeStr = `${hours}:${minutes.toString().padStart(2, '0')} ${amPm}`;
+			let newTime24 = convertTo24(newTimeStr);
 			let d = new Date();
-			let newTime = `${d.toDateString()} ${time}`;
+			let newDateTime = `${d.toDateString()} ${newTime24}`;
+			let newDateTimeObj = new Date(newDateTime);
 			if (text === 'Day Start:') {
-				times.set({ ...$times, dayStartTimeObj: new Date(newTime) });
+				times.set({ ...$times, dayStartTimeObj: newDateTimeObj });
 			} else if (text === 'Day End:') {
-				times.set({ ...$times, dayEndTimeObj: new Date(newTime) });
+				times.set({ ...$times, dayEndTimeObj: newDateTimeObj });
 			}
-			console.log($times.dayStartTimeObj);
-			console.log($times.dayEndTimeObj);
+			console.log(newTime24);
 		}
 	};
+
+	/**
+	 * @param time12Str time string
+	 * @return string of time in 24 hour format
+	 */
+	function convertTo24(time12Str) {
+		// if time12Str is already in 24 hour formate, return it as is.
+		if (time12Str.slice(-1) !== 'M') return time12Str;
+
+		if (time12Str.slice(-2) === 'AM' && hours == 12) hours = 0;
+		if (time12Str.slice(-2) === 'PM' && hours != 12) hours += 12;
+
+		console.log(
+			`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
+		);
+		return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+	}
 </script>
 
 <div class="error">{errors.hours}</div>
@@ -60,8 +88,6 @@
 			<span id="time-colon">:</span>
 			<input type="number" bind:value={minutes} style="border: {minBorder};" />
 			{#if $formate12}
-				{(hours = hours % 12)}
-				{(hours = hours ? hours : 12)}
 				<!-- hour 0 will be 12 -->
 				<select bind:value={amPm}>
 					<option value="AM" selected={amPm === 'AM'}>AM</option>
