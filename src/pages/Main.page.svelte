@@ -16,6 +16,8 @@
 	let shadowColor = '#BFC01099';
 	let btnText = 'Start Your Day';
 	let activeTab = 'home';
+	let btnDisabled;
+	let brkBtnDisabled;
 
 	function tabChange(ev) {
 		activeTab = ev.detail;
@@ -73,8 +75,14 @@
 	<Timer />
 	<DayActivity {dayEntry} />
 	<div class="btn-container">
-		<Button on:click={buttonClick} {bgColor} {btnText} {shadowColor} />
-		<BreakBtn />
+		<Button
+			on:click={buttonClick}
+			{btnDisabled}
+			{bgColor}
+			{btnText}
+			{shadowColor}
+		/>
+		<BreakBtn {brkBtnDisabled} />
 	</div>
 	<Nav {activeTab} on:tabChange={tabChange} />
 </main>

@@ -2,12 +2,14 @@
 	export let bgColor = '#fff201';
 	export let shadowColor = '#bfc01099';
 	export let btnText = 'Start Your Day';
+	export let btnDisabled = false;
 </script>
 
 <main>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
 		id="button"
+		class:btnDisabled
 		style="background-color: {bgColor}; box-shadow: 0 1rem 4rem {shadowColor}"
 		on:click
 	>
