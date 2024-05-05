@@ -18,6 +18,7 @@
 	let activeTab = 'home';
 	let btnDisabled;
 	let brkBtnDisabled;
+	let brkBtnActive;
 
 	function tabChange(ev) {
 		activeTab = ev.detail;
@@ -41,7 +42,8 @@
 				times.set({ ...$times, dayStartTimeObj: new Date() });
 				dayEntry = 'start';
 				btnState = 'end';
-				// TODO: activate break button
+				brkBtnActive = true;
+				brkBtnDisabled = false;
 				break;
 			case 'end':
 				startTimer.set(false);
@@ -52,7 +54,8 @@
 				times.set({ ...$times, dayEndTimeObj: new Date() });
 				dayEntry = 'end';
 				btnState = 'submit';
-				// TODO: deactivate break button
+				brkBtnActive = false;
+				brkBtnDisabled = true;
 				break;
 			case 'submit':
 				showModal = true;
@@ -82,7 +85,7 @@
 			{btnText}
 			{shadowColor}
 		/>
-		<BreakBtn {brkBtnDisabled} />
+		<BreakBtn {brkBtnDisabled} {brkBtnActive} />
 	</div>
 	<Nav {activeTab} on:tabChange={tabChange} />
 </main>
