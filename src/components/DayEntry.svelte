@@ -94,9 +94,21 @@
 	<p class="day-item">{text}</p>
 	{#if $editing}
 		<div class="edit-time">
-			<input type="number" bind:value={hours} style="border: {hourBorder};" />
+			<input
+				type="number"
+				oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"
+				maxlength="2"
+				bind:value={hours}
+				style="border: {hourBorder};"
+			/>
 			<span id="time-colon">:</span>
-			<input type="number" bind:value={minutes} style="border: {minBorder};" />
+			<input
+				type="number"
+				oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"
+				maxlength="2"
+				bind:value={minutes}
+				style="border: {minBorder};"
+			/>
 			{#if $formate12}
 				<!-- hour 0 will be 12 -->
 				<select bind:value={amPm}>
