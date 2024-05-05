@@ -15,6 +15,9 @@
 	let shadowColor = '#BFC01099';
 	let btnText = 'Start Your Day';
 	let activeTab = 'home';
+	let btnDisabled;
+	let brkBtnDisabled;
+	let brkBtnActive;
 
 	function tabChange(ev) {
 		activeTab = ev.detail;
@@ -37,7 +40,8 @@
 				btnText = 'End Your Day';
 				times.set({ ...$times, dayStartTimeObj: new Date() });
 				btnState = 'end';
-				// TODO: activate break button
+				brkBtnActive = true;
+				brkBtnDisabled = false;
 				break;
 			case 'end':
 				startTimer.set(false);
@@ -47,7 +51,8 @@
 				btnText = 'Submit Your Day';
 				times.set({ ...$times, dayEndTimeObj: new Date() });
 				btnState = 'submit';
-				// TODO: deactivate break button
+				brkBtnActive = false;
+				brkBtnDisabled = true;
 				break;
 			case 'submit':
 				showModal = true;
@@ -69,8 +74,14 @@
 	<Timer />
 	<DayActivity />
 	<div class="btn-container">
-		<Button on:click={buttonClick} {bgColor} {btnText} {shadowColor} />
-		<BreakBtn />
+		<Button
+			on:click={buttonClick}
+			{btnDisabled}
+			{bgColor}
+			{btnText}
+			{shadowColor}
+		/>
+		<BreakBtn {brkBtnDisabled} {brkBtnActive} />
 	</div>
 	<Nav {activeTab} on:tabChange={tabChange} />
 </main>
