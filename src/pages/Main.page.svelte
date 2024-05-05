@@ -7,7 +7,7 @@
 	import SubmitModal from '../components/SubmitModal.svelte';
 	import Nav from '../components/Nav.svelte';
 	import BreakBtn from '../components/BreakBtn.svelte';
-	import { times, formate12, startTimer, editing } from '../stores';
+	import { times, startTimer } from '../stores';
 
 	let btnState = 'start'; // start | end | submit
 	let showModal = false;

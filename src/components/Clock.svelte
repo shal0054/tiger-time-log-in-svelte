@@ -1,9 +1,16 @@
 <script>
-	import { editing, formate12 } from '../stores';
+	import { editing, formate12, times } from '../stores';
+	import { onMount } from 'svelte';
 
 	let now = new Date();
 	let hours = now.getHours().toString();
-	let amPm = hours >= 12 ? 'PM' : 'AM';
+	let amPm;
+	let currentTime;
+
+	onMount(async () => {
+		currentTime = await $times.formateTime(now, $formate12);
+		amPm = currentTime.slice(-1) === 'M' ? currentTime.slice(-2) : '';
+	});
 
 	setInterval(() => {
 		now = new Date();
@@ -13,24 +20,24 @@
 		if ($editing) return;
 
 		if ($formate12) {
-			amPm = hours >= 12 ? 'PM' : 'AM';
-			hours = hours % 12;
-			hours = hours ? hours : 12; // hour 0 will be 12
-			hours = hours.toString();
 			formate12.set(false);
 		} else {
-			hours = now.getHours().toString().padStart(2, '0');
 			formate12.set(true);
 		}
+
+		currentTime = $times.formateTime(now, $formate12);
+		amPm = currentTime.slice(-1) === 'M' ? currentTime.slice(-2) : '';
 	}
 </script>
 
 <main>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div id="clock" on:click={toggleClockFormate}>
-		<span id="current-hours">{hours}:</span><span id="current-minutes"
-			>{now.getMinutes().toString().padStart(2, '0')}</span
-		>
+		{#if $formate12}
+			<span id="current-hours">{currentTime.slice(0, -3)}</span>
+		{:else}
+			<span id="current-hours">{currentTime}</span>
+		{/if}
 		{#if $formate12}
 			<span id="am-pm">{amPm}</span>
 		{/if}

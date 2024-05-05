@@ -3,6 +3,11 @@ import { writable } from 'svelte/store';
 export const times = writable({
 	dayStartTimeObj: '',
 	dayEndTimeObj: '',
+	/*
+	 * @param {timeObj} date-time object
+	 * @param {formate12} boolean
+	 * @return {string} the formatted time
+	 **/
 	formateTime: (timeObj, formate12) => {
 		let hours = timeObj.getHours();
 		let minutes = timeObj.getMinutes().toString().padStart(2, '0');
