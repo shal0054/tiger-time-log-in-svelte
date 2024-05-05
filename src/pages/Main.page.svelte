@@ -7,7 +7,7 @@
 	import SubmitModal from '../components/SubmitModal.svelte';
 	import Nav from '../components/Nav.svelte';
 	import BreakBtn from '../components/BreakBtn.svelte';
-	import { times, formate12, startTimer } from '../stores';
+	import { times, formate12, startTimer, editing } from '../stores';
 
 	let btnState = 'start'; // start | end | submit
 	let showModal = false;
@@ -24,6 +24,8 @@
 	}
 
 	const toggleTimeFormate = () => {
+		if ($editing) return;
+
 		if ($formate12) formate12.set(false);
 		else formate12.set(true);
 	};

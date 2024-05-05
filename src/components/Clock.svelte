@@ -1,5 +1,5 @@
 <script>
-	import { times, formate12 } from '../stores';
+	import { editing, formate12 } from '../stores';
 
 	let now = new Date();
 	let hours = now.getHours().toString();
@@ -10,6 +10,8 @@
 	}, 1000);
 
 	function toggleClockFormate() {
+		if ($editing) return;
+
 		if ($formate12) {
 			amPm = hours >= 12 ? 'PM' : 'AM';
 			hours = hours % 12;

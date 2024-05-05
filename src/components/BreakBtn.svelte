@@ -1,4 +1,5 @@
 <script>
+	import { editing } from '../stores';
 	export let brkBtnDisabled = true;
 	export let brkBtnActive = false;
 	let bgColor;
@@ -6,7 +7,7 @@
 	let iconColor;
 
 	$: {
-		if (brkBtnDisabled) {
+		if (brkBtnDisabled || $editing) {
 			shadowColor = 'white';
 			bgColor = '#c0c01080';
 			iconColor = 'darkgrey';
