@@ -77,10 +77,14 @@
 	}
 
 	function cancelEditing() {
-		console.log('canceling editing');
 		editing.set(false);
-		errors.hours = '';
-		errors.minutes = '';
+		hours = time.split(':')[0];
+		minutes = time.split(':')[1].slice(0, 2);
+		amPm = time.slice(-1) === 'M' ? time.slice(-2) : '';
+		errors = { hours: '', minutes: '' };
+		timeValid = false;
+		minBorder = 'normal solid black';
+		hourBorder = 'normal solid black';
 	}
 </script>
 
