@@ -23,13 +23,6 @@
 		activeTab = ev.detail;
 	}
 
-	const toggleTimeFormate = () => {
-		if ($editing) return;
-
-		if ($formate12) formate12.set(false);
-		else formate12.set(true);
-	};
-
 	function buttonClick() {
 		// send info for the new state of the button back to the button
 		// capture the time the button was clicked and send it to DayActivity
@@ -72,7 +65,7 @@
 
 <main>
 	<TodaysDate />
-	<Clock on:click={toggleTimeFormate} />
+	<Clock />
 	<Timer />
 	<DayActivity />
 	<div class="btn-container">

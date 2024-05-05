@@ -3,7 +3,7 @@
 
 	let now = new Date();
 	let hours = now.getHours().toString();
-	let amPm;
+	let amPm = hours >= 12 ? 'PM' : 'AM';
 
 	setInterval(() => {
 		now = new Date();
@@ -17,15 +17,17 @@
 			hours = hours % 12;
 			hours = hours ? hours : 12; // hour 0 will be 12
 			hours = hours.toString();
+			formate12.set(false);
 		} else {
 			hours = now.getHours().toString().padStart(2, '0');
+			formate12.set(true);
 		}
 	}
 </script>
 
 <main>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div id="clock" on:click on:click={toggleClockFormate}>
+	<div id="clock" on:click={toggleClockFormate}>
 		<span id="current-hours">{hours}:</span><span id="current-minutes"
 			>{now.getMinutes().toString().padStart(2, '0')}</span
 		>
