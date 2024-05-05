@@ -10,7 +10,6 @@
 	import { times, formate12, startTimer } from '../stores';
 
 	let btnState = 'start'; // start | end | submit
-	let dayEntry; // start | end
 	let showModal = false;
 	let bgColor = '#FFF201';
 	let shadowColor = '#BFC01099';
@@ -37,7 +36,6 @@
 				shadowColor = '#C0101099';
 				btnText = 'End Your Day';
 				times.set({ ...$times, dayStartTimeObj: new Date() });
-				// dayEntry = 'start';
 				btnState = 'end';
 				// TODO: activate break button
 				break;
@@ -48,7 +46,6 @@
 				shadowColor = '#10C01099';
 				btnText = 'Submit Your Day';
 				times.set({ ...$times, dayEndTimeObj: new Date() });
-				// dayEntry = 'end';
 				btnState = 'submit';
 				// TODO: deactivate break button
 				break;
@@ -57,7 +54,6 @@
 				bgColor = '#FFF201';
 				shadowColor = '#BfC01099';
 				btnText = 'Start Your Day';
-				// dayEntry = '';
 				// submitDay(); // submit to firebase and reset variables
 				btnState = 'start';
 				break;
