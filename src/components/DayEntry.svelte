@@ -1,8 +1,7 @@
 <script>
-	import { times, formate12 } from '../stores';
+	import { times, formate12, editing } from '../stores';
 	export let text;
 	export let time;
-	export let editing = false;
 	let hours = time.split(':')[0];
 	let minutes = time.split(':')[1].slice(0, 2);
 	let amPm = time.slice(-1) === 'M' ? time.slice(-2) : '';
@@ -45,7 +44,7 @@
 		} else errors.minutes = '';
 
 		if (timeValid) {
-			editing = false;
+			editing.set(false);
 			let newTimeStr = `${hours}:${minutes.toString().padStart(2, '0')} ${amPm}`;
 			let newTime24 = convertTo24(newTimeStr);
 			let d = new Date();
@@ -76,13 +75,20 @@
 		);
 		return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 	}
+
+	function cancelEditing() {
+		console.log('canceling editing');
+		editing.set(false);
+		errors.hours = '';
+		errors.minutes = '';
+	}
 </script>
 
 <div class="error">{errors.hours}</div>
 <div class="error">{errors.minutes}</div>
 <div class="day-entry">
 	<p class="day-item">{text}</p>
-	{#if editing}
+	{#if $editing}
 		<div class="edit-time">
 			<input type="number" bind:value={hours} style="border: {hourBorder};" />
 			<span id="time-colon">:</span>
@@ -115,7 +121,7 @@
 			style="width: 16px;"
 			src="./assets/cancel-icon.svg"
 			alt="Cancel Editing"
-			on:click={() => (editing = false)}
+			on:click={cancelEditing}
 		/>
 	{:else}
 		<p class="day-item">{time}</p>
@@ -127,7 +133,7 @@
 			fill="currentColor"
 			class="bi bi-pencil"
 			viewBox="0 0 16 16"
-			on:click={() => (editing = true)}
+			on:click={() => editing.set(true)}
 		>
 			<path
 				d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"
