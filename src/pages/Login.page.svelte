@@ -1,4 +1,5 @@
 <script>
+	import { pages } from '../stores';
 	const logo = 'assets/GTLogo-Desktop-EN.svg';
 	let creds = { username: '', password: '' };
 	let errors = { username: '', password: '' };
@@ -6,6 +7,13 @@
 
 	function login() {
 		console.log(creds.username, creds.password);
+		pages.set({
+			loggedIn: true,
+			main: true,
+			history: false,
+			profile: false,
+			settings: false,
+		});
 	}
 
 	function validateCreds() {
