@@ -69,7 +69,9 @@
 			/>
 		</span>
 	</div>
-	<button on:click={logout}>Logout</button>
+	<button on:click={logout}
+		><img src="./assets/logout-icon.svg" alt="logout icon" /> Logout</button
+	>
 	<Nav {activeTab} on:tabChange={tabChange} />
 </main>
 
@@ -100,6 +102,18 @@
 		font-size: larger;
 	}
 	button {
+		margin: 0 auto;
 		margin-top: 3rem;
+		background-color: white;
+		color: red;
+		border-color: #f44336;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 0.4rem;
+	}
+	button:active {
+		background: #f44336;
+		color: white;
 	}
 </style>
