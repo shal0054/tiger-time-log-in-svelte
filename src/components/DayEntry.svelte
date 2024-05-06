@@ -61,7 +61,7 @@
 
 	/**
 	 * @param time12Str time string
-	 * @return string of time in 24 hour format
+	 * @return {string} of time in 24 hour format
 	 */
 	function convertTo24(time12Str) {
 		// if time12Str is already in 24 hour formate, return it as is.

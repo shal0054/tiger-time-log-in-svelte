@@ -27,3 +27,12 @@ export const formate12 = writable(false);
 export const startTimer = writable(false);
 export const totalSecondsWorked = writable(0);
 export const editing = writable(false);
+
+// simulated routing
+export const pages = writable({
+	loggedIn: true,
+	main: true,
+	history: false,
+	profile: false,
+	settings: false,
+});

@@ -4,23 +4,19 @@
 	import Profile from './pages/Profile.page.svelte';
 	import History from './pages/History.page.svelte';
 	import Settings from './pages/Settings.page.svelte';
-
-	export let loggedIn = true;
-	export let profile = false;
-	export let history = false;
-	export let settings = false;
+	import { pages } from './stores';
 </script>
 
 <main>
-	{#if !loggedIn}
-		<LoginPage {loggedIn} />
-	{:else if profile}
+	{#if !$pages.loggedIn}
+		<LoginPage />
+	{:else if $pages.profile}
 		<Profile />
-	{:else if history}
+	{:else if $pages.history}
 		<History />
-	{:else if settings}
+	{:else if $pages.settings}
 		<Settings />
-	{:else}
+	{:else if $pages.main}
 		<MainPage />
 	{/if}
 </main>
