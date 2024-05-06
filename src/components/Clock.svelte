@@ -12,8 +12,10 @@
 		amPm = currentTime.slice(-1) === 'M' ? currentTime.slice(-2) : '';
 	});
 
-	setInterval(() => {
+	setInterval(async () => {
 		now = new Date();
+		currentTime = await $times.formateTime(now, $formate12);
+		amPm = currentTime.slice(-1) === 'M' ? currentTime.slice(-2) : '';
 	}, 1000);
 
 	function toggleClockFormate() {
