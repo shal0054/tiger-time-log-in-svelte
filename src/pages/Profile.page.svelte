@@ -1,10 +1,15 @@
 <script>
 	import Nav from '../components/Nav.svelte';
+	import { pages } from '../stores';
 
 	let activeTab = 'profile';
 
 	function tabChange(ev) {
 		activeTab = ev.detail;
+	}
+
+	function logout() {
+		pages.set({ ...$pages, loggedIn: false });
 	}
 </script>
 
@@ -64,6 +69,7 @@
 			/>
 		</span>
 	</div>
+	<button on:click={logout}>Logout</button>
 	<Nav {activeTab} on:tabChange={tabChange} />
 </main>
 
@@ -92,5 +98,8 @@
 	}
 	.profile-text {
 		font-size: larger;
+	}
+	button {
+		margin-top: 3rem;
 	}
 </style>
