@@ -184,7 +184,12 @@
 		margin: auto 0;
 	}
 	input {
-		width: 3rem;
+		text-align: center;
+		width: 2.6rem;
+		height: fit-content;
+	}
+	select {
+		width: fit-content;
 		height: fit-content;
 	}
 	.error {

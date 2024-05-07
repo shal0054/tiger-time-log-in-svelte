@@ -7,6 +7,7 @@
 	let currentTime;
 
 	onMount(async () => {
+		console.log('clock on mount');
 		currentTime = await $times.formateTime(now, $formate12);
 		amPm = currentTime.slice(-1) === 'M' ? currentTime.slice(-2) : '';
 	});
@@ -34,12 +35,12 @@
 <main>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div id="clock" on:click={toggleClockFormate}>
-		{#if $formate12}
+		{#if $formate12 && currentTime}
 			<span id="current-time">{currentTime.slice(0, -3)}</span>
 		{:else}
 			<span id="current-time">{currentTime}</span>
 		{/if}
-		{#if $formate12}
+		{#if $formate12 && currentTime}
 			<span id="am-pm">{amPm}</span>
 		{/if}
 	</div>
