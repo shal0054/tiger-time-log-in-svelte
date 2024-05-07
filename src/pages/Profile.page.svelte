@@ -78,7 +78,6 @@
 <style>
 	main {
 		text-align: center;
-		margin-bottom: 4rem;
 	}
 	.profile-pic {
 		width: 65%;
@@ -103,7 +102,7 @@
 		font-size: larger;
 	}
 	button {
-		margin: 0 auto;
+		margin: 4rem auto;
 		margin-top: 3rem;
 		background-color: white;
 		color: red;
