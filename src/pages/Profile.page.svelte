@@ -103,8 +103,7 @@
 		font-size: larger;
 	}
 	button {
-		margin: 0 auto;
-		margin-top: 3rem;
+		margin: 3rem auto 4rem auto;
 		background-color: white;
 		color: red;
 		border-color: #f44336;
