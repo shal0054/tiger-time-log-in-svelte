@@ -78,6 +78,7 @@
 <style>
 	main {
 		text-align: center;
+		margin-bottom: 4rem;
 	}
 	.profile-pic {
 		width: 65%;
