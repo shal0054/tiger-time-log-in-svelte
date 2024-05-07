@@ -145,6 +145,7 @@
 		bottom: 0;
 		margin-right: auto;
 		margin-left: auto;
+		margin-top: 4rem;
 		padding-top: 2rem;
 		left: 0px;
 		right: 0px;
