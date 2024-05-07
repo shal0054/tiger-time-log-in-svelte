@@ -3,7 +3,6 @@
 	import { onMount } from 'svelte';
 
 	let now = new Date();
-	let hours = now.getHours().toString();
 	let amPm;
 	let currentTime;
 
@@ -36,9 +35,9 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div id="clock" on:click={toggleClockFormate}>
 		{#if $formate12}
-			<span id="current-hours">{currentTime.slice(0, -3)}</span>
+			<span id="current-time">{currentTime.slice(0, -3)}</span>
 		{:else}
-			<span id="current-hours">{currentTime}</span>
+			<span id="current-time">{currentTime}</span>
 		{/if}
 		{#if $formate12}
 			<span id="am-pm">{amPm}</span>

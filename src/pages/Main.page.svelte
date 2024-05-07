@@ -7,7 +7,7 @@
 	import SubmitModal from '../components/SubmitModal.svelte';
 	import Nav from '../components/Nav.svelte';
 	import BreakBtn from '../components/BreakBtn.svelte';
-	import { times, startTimer } from '../stores';
+	import { times, startTimer, editing } from '../stores';
 
 	let btnState = 'start'; // start | end | submit
 	let showModal = false;
@@ -24,6 +24,7 @@
 	}
 
 	function buttonClick() {
+		if ($editing) return;
 		// send info for the new state of the button back to the button
 		// capture the time the button was clicked and send it to DayActivity
 		// update btnState
