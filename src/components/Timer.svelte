@@ -1,5 +1,5 @@
 <script>
-	import { startTimer, totalSecondsWorked } from '../stores';
+	import { startTimer, totalSecondsWorked, times } from '../stores';
 
 	let timerStr = '00:00:00';
 	let timer;
@@ -22,7 +22,7 @@
 		if (hour < 10) hour = '0' + hour;
 		if (minute < 10) minute = '0' + minute;
 		if (seconds < 10) seconds = '0' + seconds;
-		timerStr = hour + ':' + minute + ':' + seconds;
+		timerStr = `${hour}:${minute}:${seconds}`;
 	}
 </script>
 

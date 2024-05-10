@@ -1,19 +1,30 @@
 <script>
-	import { times, formate12, editing } from '../stores';
+	import { times, formate12, editing, totalSecondsWorked } from '../stores';
 	export let text;
 	export let time;
 	let hours = time.split(':')[0];
 	let minutes = time.split(':')[1].slice(0, 2);
 	let amPm = time.slice(-1) === 'M' ? time.slice(-2) : '';
-	let errors = { hours: '', minutes: '' };
+	let errors = { hours: '', minutes: '', sequence: '' };
 	let timeValid = false;
 	let minBorder = 'normal solid black';
 	let hourBorder = 'normal solid black';
-	let isEditing = false;
+	let editingHere = false;
+
+	$: {
+		if ($times.dayEndTimeObj) {
+			let seconds = Math.floor(
+				($times.dayEndTimeObj - $times.dayStartTimeObj) / 1000
+			);
+			totalSecondsWorked.set(seconds);
+			console.log($times.dayEndTimeObj < $times.dayStartTimeObj);
+		}
+	}
 
 	const setUpdatedTime = () => {
 		timeValid = true;
 
+		// invalid hours
 		if (!hours && hours != 0) {
 			timeValid = false;
 			errors.hours = "Hours can't be blank";
@@ -22,8 +33,11 @@
 			timeValid = false;
 			errors.hours = 'Hours are out of range';
 			hourBorder = 'medium solid red';
-		} else errors.hours = '';
-
+		} else {
+			errors.hours = '';
+			minBorder = 'normal solid black';
+		}
+		// invalid hours formate12
 		if ($formate12 && hours > 12) {
 			timeValid = false;
 			errors.hours = "Hours can't be greater than 12";
@@ -32,8 +46,11 @@
 			timeValid = false;
 			errors.hours = "Hours can't be less than 1";
 			hourBorder = 'medium solid red';
-		} else errors.hours = '';
-
+		} else if ($formate12) {
+			errors.hours = '';
+			minBorder = 'normal solid black';
+		}
+		// invalid minutes
 		if (!minutes && minutes != 0) {
 			timeValid = false;
 			errors.minutes = "Minutes can't be blank";
@@ -42,11 +59,25 @@
 			timeValid = false;
 			errors.minutes = 'Minutes are out of range';
 			minBorder = 'medium solid red';
-		} else errors.minutes = '';
-
+		} else {
+			errors.minutes = '';
+			minBorder = 'normal solid black';
+		}
+		// invalid time sequence
+		if ($times.dayEndTimeObj && $times.dayEndTimeObj < $times.dayStartTimeObj) {
+			timeValid = false;
+			errors.sequence = "Start time can't be after end time";
+			hourBorder = 'medium solid red';
+			minBorder = 'medium solid red';
+		} else if ($times.dayStartTimeObj < $times.dayEndTimeObj) {
+			errors.sequence = '';
+			hourBorder = 'normal solid black';
+			minBorder = 'normal solid black';
+		}
+		// success
 		if (timeValid) {
 			editing.set(false);
-			isEditing = false;
+			editingHere = false;
 			let newTimeStr = `${hours}:${minutes.toString().padStart(2, '0')} ${amPm}`;
 			let newTime24 = convertTo24(newTimeStr);
 			let d = new Date();
@@ -80,7 +111,7 @@
 
 	function cancelEditing() {
 		editing.set(false);
-		isEditing = false;
+		editingHere = false;
 		hours = time.split(':')[0];
 		minutes = time.split(':')[1].slice(0, 2);
 		amPm = time.slice(-1) === 'M' ? time.slice(-2) : '';
@@ -91,11 +122,12 @@
 	}
 </script>
 
+<div class="error">{errors.sequence}</div>
 <div class="error">{errors.hours}</div>
 <div class="error">{errors.minutes}</div>
 <div class="day-entry">
 	<p class="day-item">{text}</p>
-	{#if isEditing}
+	{#if editingHere}
 		<div class="edit-time">
 			<input
 				type="number"
@@ -154,7 +186,7 @@
 			viewBox="0 0 16 16"
 			on:click={() => {
 				editing.set(true);
-				isEditing = true;
+				editingHere = true;
 			}}
 		>
 			<path
@@ -185,7 +217,7 @@
 	}
 	input {
 		text-align: center;
-		width: 2.6rem;
+		width: 2.8rem;
 		height: fit-content;
 	}
 	select {
