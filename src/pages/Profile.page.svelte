@@ -78,7 +78,7 @@
 <style>
 	main {
 		text-align: center;
-		margin-bottom: 8rem;
+		padding-bottom: 4.6rem;
 	}
 	.profile-pic {
 		width: 65%;

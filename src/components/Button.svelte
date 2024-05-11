@@ -23,6 +23,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		text-align: center;
 		margin: 2rem auto;
 		border-radius: 50%;
 		height: 35vw;

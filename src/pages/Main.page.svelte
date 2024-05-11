@@ -42,7 +42,7 @@
 			case 'end':
 				startTimer.set(false);
 				// TODO: present a confirmation modal
-				bgColor = 'green';
+				bgColor = '#018a2f';
 				shadowColor = '#10C01099';
 				btnText = 'Submit Your Day';
 				times.set({ ...$times, dayEndTimeObj: new Date() });
@@ -85,11 +85,11 @@
 <style>
 	main {
 		z-index: -1;
+		padding-bottom: 4.7rem;
 	}
 	.btn-container {
 		display: flex;
 		justify-content: center;
 		gap: 1rem;
-		margin-bottom: 4rem;
 	}
 </style>
