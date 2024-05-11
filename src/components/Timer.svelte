@@ -1,5 +1,5 @@
 <script>
-	import { startTimer, totalSecondsWorked, times } from '../stores';
+	import { startTimer, totalSecondsWorked } from '../stores';
 
 	let timerStr = '00:00:00';
 	let timer;

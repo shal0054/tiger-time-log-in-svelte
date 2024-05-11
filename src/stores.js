@@ -8,10 +8,10 @@ export const times = writable({
 	 * @param {formate12} boolean
 	 * @return {string} the formatted time
 	 **/
-	formateTime: (timeObj, formate12) => {
+	formateTime: (timeObj, format12) => {
 		let hours = timeObj.getHours();
 		let minutes = timeObj.getMinutes().toString().padStart(2, '0');
-		if (formate12) {
+		if (format12) {
 			let amPm = hours >= 12 ? 'PM' : 'AM';
 			hours = hours % 12;
 			hours = hours ? hours : 12; // hour 0 will be 12
@@ -23,7 +23,7 @@ export const times = writable({
 	},
 });
 
-export const formate12 = writable(false);
+export const format12 = writable(false);
 export const startTimer = writable(false);
 export const totalSecondsWorked = writable(0);
 export const editing = writable(false);

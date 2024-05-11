@@ -1,6 +1,6 @@
 <script>
 	import DayEntry from './DayEntry.svelte';
-	import { times, formate12 } from '../stores';
+	import { times, format12 } from '../stores';
 </script>
 
 <main>
@@ -11,13 +11,13 @@
 		{:else}
 			<DayEntry
 				text={'Day Start:'}
-				time={$times.formateTime($times.dayStartTimeObj, $formate12)}
+				timeStr={$times.formateTime($times.dayStartTimeObj, $format12)}
 			/>
 		{/if}
 		{#if $times.dayEndTimeObj}
 			<DayEntry
 				text={'Day End:'}
-				time={$times.formateTime($times.dayEndTimeObj, $formate12)}
+				timeStr={$times.formateTime($times.dayEndTimeObj, $format12)}
 			/>
 		{/if}
 	</div>
