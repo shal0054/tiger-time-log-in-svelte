@@ -3,10 +3,12 @@
 	import { times, format12, editing, totalSecondsWorked } from '../stores';
 	export let text;
 	export let timeStr;
-	let date = new Date();
+	let date =
+		text === 'Day Start:'
+			? new Date($times.dayStartTimeObj)
+			: new Date($times.dayEndTimeObj);
 	let editingTime = false;
 	let editingDate = false;
-	$: console.log(date);
 </script>
 
 <div class="day-entry">
@@ -14,7 +16,12 @@
 		<p class="day-item text">{text}</p>
 		{#if editingDate}
 			<div class="edit-group">
-				<DateInput bind:value={date} format={'yyyy-MM-dd'} />
+				<DateInput
+					bind:value={date}
+					format={'yyyy-MM-dd'}
+					min={new Date('2024-01-01 00:00:00')}
+					max={new Date('2035-12-31 23:59:59')}
+				/>
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -26,6 +33,11 @@
 					on:click={() => {
 						editing.set(false);
 						editingDate = false;
+						if (text === 'Day Start:') {
+							times.set({ ...$times, dayStartTimeObj: date });
+						} else if (text === 'Day End:') {
+							times.set({ ...$times, dayEndTimeObj: date });
+						}
 					}}
 				>
 					<path d="M11 2H9v3h2z" />
@@ -46,7 +58,11 @@
 			</div>
 		{:else}
 			<div class="edit-group">
-				<p class="day-item date">{date.toDateString()}</p>
+				{#if text === 'Day Start:'}
+					<p class="day-item date">{$times.dayStartTimeObj.toDateString()}</p>
+				{:else}
+					<p class="day-item date">{$times.dayEndTimeObj.toDateString()}</p>
+				{/if}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<img
 					on:click={() => {
