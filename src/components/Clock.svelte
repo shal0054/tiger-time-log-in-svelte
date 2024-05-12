@@ -6,14 +6,22 @@
 	let amPm;
 	let currentTime;
 
-	onMount(async () => {
-		currentTime = await $times.formateTime(now, $format12);
+	onMount(() => {
+		currentTime = now.toLocaleTimeString('en-US', {
+			hour: 'numeric',
+			minute: 'numeric',
+			hour12: $format12,
+		});
 		amPm = currentTime.slice(-1) === 'M' ? currentTime.slice(-2) : '';
 	});
 
-	setInterval(async () => {
+	setInterval(() => {
 		now = new Date();
-		currentTime = await $times.formateTime(now, $format12);
+		currentTime = now.toLocaleTimeString('en-US', {
+			hour: 'numeric',
+			minute: 'numeric',
+			hour12: $format12,
+		});
 		amPm = currentTime.slice(-1) === 'M' ? currentTime.slice(-2) : '';
 	}, 1000);
 
@@ -26,7 +34,11 @@
 			format12.set(true);
 		}
 
-		currentTime = $times.formateTime(now, $format12);
+		currentTime = now.toLocaleTimeString('en-US', {
+			hour: 'numeric',
+			minute: 'numeric',
+			hour12: $format12,
+		});
 		amPm = currentTime.slice(-1) === 'M' ? currentTime.slice(-2) : '';
 	}
 </script>

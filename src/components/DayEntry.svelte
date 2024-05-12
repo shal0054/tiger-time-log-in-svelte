@@ -9,6 +9,15 @@
 			: new Date($times.dayEndTimeObj);
 	let editingTime = false;
 	let editingDate = false;
+
+	$: {
+		if ($times.dayEndTimeObj) {
+			let seconds = Math.floor(
+				($times.dayEndTimeObj - $times.dayStartTimeObj) / 1000
+			);
+			totalSecondsWorked.set(seconds);
+		}
+	}
 </script>
 
 <div class="day-entry">

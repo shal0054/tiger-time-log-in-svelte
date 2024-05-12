@@ -11,13 +11,21 @@
 		{:else}
 			<DayEntry
 				text={'Day Start:'}
-				timeStr={$times.formateTime($times.dayStartTimeObj, $format12)}
+				timeStr={$times.dayStartTimeObj.toLocaleTimeString('en-US', {
+					hour: 'numeric',
+					minute: 'numeric',
+					hour12: $format12,
+				})}
 			/>
 		{/if}
 		{#if $times.dayEndTimeObj}
 			<DayEntry
 				text={'Day End:'}
-				timeStr={$times.formateTime($times.dayEndTimeObj, $format12)}
+				timeStr={$times.dayEndTimeObj.toLocaleTimeString('en-US', {
+					hour: 'numeric',
+					minute: 'numeric',
+					hour12: $format12,
+				})}
 			/>
 		{/if}
 	</div>

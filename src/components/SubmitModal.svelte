@@ -1,5 +1,5 @@
 <script>
-	import { times } from '../stores';
+	import { times, format12 } from '../stores';
 
 	export let showModal = false;
 
@@ -8,10 +8,18 @@
 
 	$: {
 		startTimeStr = $times.dayStartTimeObj
-			? $times.formateTime($times.dayStartTimeObj)
+			? $times.dayStartTimeObj.toLocaleTimeString('en-US', {
+					hour: 'numeric',
+					minute: 'numeric',
+					hour12: $format12,
+				})
 			: '-:-';
 		endTimeStr = $times.dayEndTimeObj
-			? $times.formateTime($times.dayEndTimeObj)
+			? $times.dayEndTimeObj.toLocaleTimeString('en-US', {
+					hour: 'numeric',
+					minute: 'numeric',
+					hour12: $format12,
+				})
 			: '-:-';
 	}
 </script>
