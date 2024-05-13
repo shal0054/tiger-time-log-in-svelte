@@ -1,6 +1,6 @@
 <script>
 	import DayEntry from './DayEntry.svelte';
-	import { times, format12 } from '../stores';
+	import { times } from '../stores';
 </script>
 
 <main>
@@ -9,24 +9,10 @@
 		{#if !$times.dayStartTimeObj}
 			<p>Day Not Started</p>
 		{:else}
-			<DayEntry
-				text={'Day Start:'}
-				timeStr={$times.dayStartTimeObj.toLocaleTimeString('en-US', {
-					hour: 'numeric',
-					minute: 'numeric',
-					hour12: $format12,
-				})}
-			/>
+			<DayEntry text={'Day Start:'} />
 		{/if}
 		{#if $times.dayEndTimeObj}
-			<DayEntry
-				text={'Day End:'}
-				timeStr={$times.dayEndTimeObj.toLocaleTimeString('en-US', {
-					hour: 'numeric',
-					minute: 'numeric',
-					hour12: $format12,
-				})}
-			/>
+			<DayEntry text={'Day End:'} />
 		{/if}
 	</div>
 </main>
