@@ -40,6 +40,20 @@
 		}
 	}
 
+	/**
+	 * @param time12Str time string
+	 * @return {string} of time in 24 hour format
+	 */
+	function convertTo24(time12Str) {
+		// if time12Str is already in 24 hour formate, return it as is.
+		if (time12Str.slice(-1) !== 'M') return time12Str;
+
+		if (time12Str.slice(-2) === 'AM' && Number(hours) == 12) hours = 0;
+		if (time12Str.slice(-2) === 'PM' && Number(hours) != 12) hours += 12;
+
+		return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+	}
+
 	function saveUpdatedTime() {
 		timeValid = true;
 
@@ -52,11 +66,9 @@
 			}
 			timeStr = newTime;
 		}
-		console.log(date);
-		let newDtObj = new Date(date.toDateString() + ' ' + timeStr);
-		if (text === 'Day Start:')
-			times.set({ ...$times, dayStartTimeObj: newDtObj });
-		else times.set({ ...$times, dayEndTimeObj: newDtObj });
+		date = new Date(date.toDateString() + ' ' + convertTo24(timeStr).trim());
+		if (text === 'Day Start:') times.set({ ...$times, dayStartTimeObj: date });
+		else times.set({ ...$times, dayEndTimeObj: date });
 	}
 
 	function cancelEditing() {
@@ -147,14 +159,20 @@
 						type="number"
 						oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"
 						maxlength="2"
-						bind:value={hours}
+						placeholder={hours.toString().padStart(2, '0')}
+						on:input={ev => {
+							hours = ev.target.value;
+						}}
 					/>
 					<span id="time-colon">:</span>
 					<input
 						type="number"
 						oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"
 						maxlength="2"
-						bind:value={minutes}
+						placeholder={minutes}
+						on:input={ev => {
+							minutes = ev.target.value.toString().padStart(2, '0');
+						}}
 					/>
 					{#if $format12}
 						<!-- hour 0 will be 12 -->
