@@ -14,7 +14,6 @@
 	let editingHere = false;
 
 	$: {
-		console.log('hours:', hours);
 		if ($times.dayEndTimeObj) {
 			let seconds = Math.floor(
 				($times.dayEndTimeObj - $times.dayStartTimeObj) / 1000

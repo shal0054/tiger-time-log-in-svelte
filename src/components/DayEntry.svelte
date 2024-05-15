@@ -50,10 +50,8 @@
 	function convertTo24(time12Str) {
 		// if time12Str is already in 24 hour formate, return it as is.
 		if (time12Str.slice(-1) !== 'M') return time12Str;
-
 		if (time12Str.slice(-2) === 'AM' && hours == 12) hours = 0;
 		if (time12Str.slice(-2) === 'PM' && hours != 12) hours += 12;
-
 		return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 	}
 
@@ -110,7 +108,26 @@
 		}
 	}
 
-	function cancelEditing() {
+	function saveUpdatedDate() {
+		if (text === 'Day Start:') {
+			times.set({ ...$times, dayStartTimeObj: date });
+		} else {
+			times.set({ ...$times, dayEndTimeObj: date });
+		}
+
+		if ($times.dayEndTimeObj && $times.dayEndTimeObj < $times.dayStartTimeObj) {
+			errors.sequence =
+				text === 'Day Start:'
+					? "Start date can't be after end date"
+					: "End date can't be before start date";
+		} else {
+			errors.sequence = '';
+			editing.set(false);
+			editingDate = false;
+		}
+	}
+
+	function cancelTimeEditing() {
 		editing.set(false);
 		editingTime = false;
 		hours =
@@ -138,7 +155,7 @@
 					bind:value={date}
 					format={'yyyy-MM-dd'}
 					min={new Date('2024-01-01 00:00:00')}
-					max={new Date('2035-12-31 23:59:59')}
+					max={new Date('2030-12-31 23:59:59')}
 				/>
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<svg
@@ -148,15 +165,7 @@
 					fill="green"
 					class="bi bi-floppy"
 					viewBox="0 0 16 16"
-					on:click={() => {
-						editing.set(false);
-						editingDate = false;
-						if (text === 'Day Start:') {
-							times.set({ ...$times, dayStartTimeObj: date });
-						} else if (text === 'Day End:') {
-							times.set({ ...$times, dayEndTimeObj: date });
-						}
-					}}
+					on:click={saveUpdatedDate}
 				>
 					<path d="M11 2H9v3h2z" />
 					<path
@@ -256,7 +265,7 @@
 					style="width: 16px;"
 					src="./assets/cancel-icon.svg"
 					alt="Cancel Editing"
-					on:click={cancelEditing}
+					on:click={cancelTimeEditing}
 				/>
 			</div>
 		{:else}
