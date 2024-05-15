@@ -59,8 +59,29 @@
 		return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 	}
 
+	$: {
+		console.log('hours is ' + hours, typeof hours);
+		console.log('minutes is ' + minutes, typeof minutes);
+	}
+
 	function saveUpdatedTime() {
 		timeValid = true;
+
+		if ($format12) {
+			// invalid hours format12
+			if ($format12 && hours > 12) {
+				timeValid = false;
+				errors.hours = "Hours can't be greater than 12";
+				hourBorder = 'medium solid red';
+			} else if ($format12 && hours < 1) {
+				timeValid = false;
+				errors.hours = "Hours can't be less than 1";
+				hourBorder = 'medium solid red';
+			} else if ($format12) {
+				errors.hours = '';
+				minBorder = 'normal solid #bfc01099';
+			}
+		}
 
 		if (timeValid) {
 			editing.set(false);
@@ -175,7 +196,7 @@
 							: hoursOriginal.toString().padStart(2, '0')}
 						on:input={ev => {
 							hours =
-								ev.target.value === ''
+								ev.target.value == ''
 									? hoursOriginal
 									: parseInt(ev.target.value);
 						}}
@@ -189,9 +210,9 @@
 						placeholder={minutesOriginal}
 						on:input={ev => {
 							minutes =
-								ev.target.value === ''
+								ev.target.value == ''
 									? minutesOriginal
-									: ev.target.value.toString().padStart(2, '0');
+									: ev.target.value.padStart(2, '0');
 						}}
 						style="border: {minBorder};"
 					/>
@@ -236,6 +257,8 @@
 					on:click={() => {
 						editing.set(true);
 						editingTime = true;
+						hours = hoursOriginal;
+						minutes = minutesOriginal;
 					}}
 					src="assets/edit-icon.svg"
 					alt="edit icon"
@@ -279,5 +302,11 @@
 	select {
 		width: fit-content;
 		height: fit-content;
+	}
+	.error {
+		font-weight: bold;
+		font-size: smaller;
+		color: red;
+		margin: 1rem auto;
 	}
 </style>
