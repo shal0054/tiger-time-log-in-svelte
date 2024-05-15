@@ -53,7 +53,7 @@
 
 		if (time12Str.slice(-2) === 'AM' && hours == 12) hours = 0;
 		if (time12Str.slice(-2) === 'PM' && hours != 12) hours += 12;
-		console.log('hours in convertTo24:', hours, typeof hours);
+
 		return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 	}
 
