@@ -10,9 +10,7 @@
 	let hours;
 	let minutes;
 	$: hoursOriginal =
-		$format12 && date.getHours() > 12
-			? date.getHours() - 12
-			: date.getHours().toString().padStart(2, '0');
+		$format12 && date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
 	$: minutesOriginal = date.getMinutes().toString().padStart(2, '0');
 	$: amPm = $format12 ? timeStr.slice(-2) : '';
 	let timeValid = false;
@@ -55,34 +53,46 @@
 
 		if (time12Str.slice(-2) === 'AM' && hours == 12) hours = 0;
 		if (time12Str.slice(-2) === 'PM' && hours != 12) hours += 12;
-
+		console.log('hours in convertTo24:', hours, typeof hours);
 		return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-	}
-
-	$: {
-		console.log('hours is ' + hours, typeof hours);
-		console.log('minutes is ' + minutes, typeof minutes);
 	}
 
 	function saveUpdatedTime() {
 		timeValid = true;
-
+		// Validate hours
 		if ($format12) {
 			// invalid hours format12
-			if ($format12 && hours > 12) {
+			if (hours > 12) {
 				timeValid = false;
 				errors.hours = "Hours can't be greater than 12";
 				hourBorder = 'medium solid red';
-			} else if ($format12 && hours < 1) {
+			} else if (hours < 1) {
 				timeValid = false;
 				errors.hours = "Hours can't be less than 1";
 				hourBorder = 'medium solid red';
-			} else if ($format12) {
+			} else {
 				errors.hours = '';
-				minBorder = 'normal solid #bfc01099';
+				hourBorder = 'normal solid #bfc01099';
 			}
+		} else if (hours < 0 || hours > 23) {
+			// invalid hours 24 hour format
+			timeValid = false;
+			errors.hours = 'Hours are out of range';
+			hourBorder = 'medium solid red';
+		} else {
+			errors.hours = '';
+			hourBorder = 'normal solid #bfc01099';
 		}
-
+		// Validate minutes
+		if (minutes < 0 || minutes > 59) {
+			timeValid = false;
+			errors.minutes = 'Minutes are out of range';
+			minBorder = 'medium solid red';
+		} else {
+			errors.minutes = '';
+			minBorder = 'normal solid #bfc01099';
+		}
+		// time is valid
 		if (timeValid) {
 			editing.set(false);
 			editingTime = false;
