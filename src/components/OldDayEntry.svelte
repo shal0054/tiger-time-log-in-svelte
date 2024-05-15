@@ -124,7 +124,7 @@
 	}
 </script>
 
-<!-- <div class="error">{errors.sequence}</div> -->
+<div class="error">{errors.sequence}</div>
 <div class="error">{errors.hours}</div>
 <div class="error">{errors.minutes}</div>
 <div class="day-entry">

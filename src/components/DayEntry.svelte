@@ -7,15 +7,16 @@
 		text === 'Day Start:' ? $times.dayStartTimeObj : $times.dayEndTimeObj;
 	let editingTime = false;
 	let editingDate = false;
-	let hours =
+	$: hours =
 		$format12 && date.getHours() > 12
-			? (date.getHours() - 12).toString()
+			? date.getHours() - 12
 			: date.getHours().toString().padStart(2, '0');
 	let minutes = date.getMinutes().toString().padStart(2, '0');
 	$: amPm = $format12 ? timeStr.slice(-2) : '';
 	let timeValid = false;
-	let minBorder = 'normal solid black';
-	let hourBorder = 'normal solid black';
+	let minBorder = 'normal solid #bfc01099';
+	let hourBorder = 'normal solid #bfc01099';
+	let errors = { hours: '', minutes: '', sequence: '' };
 
 	$: {
 		if (text === 'Day Start:') {
@@ -31,13 +32,15 @@
 				hour12: $format12,
 			});
 		}
-
+		let seconds;
 		if ($times.dayEndTimeObj) {
-			let seconds = Math.floor(
+			seconds = Math.floor(
 				($times.dayEndTimeObj - $times.dayStartTimeObj) / 1000
 			);
-			totalSecondsWorked.set(seconds);
+		} else {
+			seconds = Math.floor((new Date() - $times.dayStartTimeObj) / 1000);
 		}
+		totalSecondsWorked.set(seconds);
 	}
 
 	/**
@@ -47,9 +50,9 @@
 	function convertTo24(time12Str) {
 		// if time12Str is already in 24 hour formate, return it as is.
 		if (time12Str.slice(-1) !== 'M') return time12Str;
-
-		if (time12Str.slice(-2) === 'AM' && Number(hours) == 12) hours = 0;
-		if (time12Str.slice(-2) === 'PM' && Number(hours) != 12) hours += 12;
+		// console.log('hours is', typeof hours);
+		if (time12Str.slice(-2) === 'AM' && hours == 12) hours = 0;
+		if (time12Str.slice(-2) === 'PM' && hours != 12) hours += 12;
 
 		return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 	}
@@ -58,17 +61,20 @@
 		timeValid = true;
 
 		if (timeValid) {
-			let newTime;
+			editing.set(false);
+			editingTime = false;
+
 			if ($format12) {
-				newTime = `${hours}:${minutes.toString().padStart(2, '0')}:${amPm}`;
+				timeStr = `${hours.toString()}:${minutes.toString().padStart(2, '0')} ${amPm}`;
 			} else {
-				newTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+				timeStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 			}
-			timeStr = newTime;
+
+			date = new Date(date.toDateString() + ' ' + convertTo24(timeStr).trim());
+			if (text === 'Day Start:')
+				times.set({ ...$times, dayStartTimeObj: date });
+			else times.set({ ...$times, dayEndTimeObj: date });
 		}
-		date = new Date(date.toDateString() + ' ' + convertTo24(timeStr).trim());
-		if (text === 'Day Start:') times.set({ ...$times, dayStartTimeObj: date });
-		else times.set({ ...$times, dayEndTimeObj: date });
 	}
 
 	function cancelEditing() {
@@ -80,13 +86,16 @@
 				: date.getHours().toString().padStart(2, '0');
 		minutes = date.getMinutes().toString().padStart(2, '0');
 		amPm = $format12 ? timeStr.slice(-2) : '';
-		// errors = { hours: '', minutes: '', sequences: '' };
+		errors = { hours: '', minutes: '', sequence: '' };
 		timeValid = false;
-		minBorder = 'normal solid black';
-		hourBorder = 'normal solid black';
+		minBorder = 'normal solid #bfc01099';
+		hourBorder = 'normal solid #bfc01099';
 	}
 </script>
 
+<div class="error">{errors.sequence}</div>
+<div class="error">{errors.hours}</div>
+<div class="error">{errors.minutes}</div>
 <div class="day-entry">
 	<div class="date-entry">
 		<p class="day-item text">{text}</p>
@@ -161,8 +170,9 @@
 						maxlength="2"
 						placeholder={hours.toString().padStart(2, '0')}
 						on:input={ev => {
-							hours = ev.target.value;
+							hours = parseInt(ev.target.value);
 						}}
+						style="border: {hourBorder};"
 					/>
 					<span id="time-colon">:</span>
 					<input
@@ -173,6 +183,7 @@
 						on:input={ev => {
 							minutes = ev.target.value.toString().padStart(2, '0');
 						}}
+						style="border: {minBorder};"
 					/>
 					{#if $format12}
 						<!-- hour 0 will be 12 -->
@@ -191,8 +202,6 @@
 					class="bi bi-floppy"
 					viewBox="0 0 16 16"
 					on:click={() => {
-						editing.set(false);
-						editingTime = false;
 						saveUpdatedTime();
 					}}
 				>
