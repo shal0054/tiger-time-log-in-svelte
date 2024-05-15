@@ -7,11 +7,13 @@
 		text === 'Day Start:' ? $times.dayStartTimeObj : $times.dayEndTimeObj;
 	let editingTime = false;
 	let editingDate = false;
-	$: hours =
+	let hours;
+	let minutes;
+	$: hoursOriginal =
 		$format12 && date.getHours() > 12
 			? date.getHours() - 12
 			: date.getHours().toString().padStart(2, '0');
-	let minutes = date.getMinutes().toString().padStart(2, '0');
+	$: minutesOriginal = date.getMinutes().toString().padStart(2, '0');
 	$: amPm = $format12 ? timeStr.slice(-2) : '';
 	let timeValid = false;
 	let minBorder = 'normal solid #bfc01099';
@@ -50,7 +52,7 @@
 	function convertTo24(time12Str) {
 		// if time12Str is already in 24 hour formate, return it as is.
 		if (time12Str.slice(-1) !== 'M') return time12Str;
-		// console.log('hours is', typeof hours);
+
 		if (time12Str.slice(-2) === 'AM' && hours == 12) hours = 0;
 		if (time12Str.slice(-2) === 'PM' && hours != 12) hours += 12;
 
@@ -168,9 +170,14 @@
 						type="number"
 						oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"
 						maxlength="2"
-						placeholder={hours.toString().padStart(2, '0')}
+						placeholder={$format12
+							? hoursOriginal
+							: hoursOriginal.toString().padStart(2, '0')}
 						on:input={ev => {
-							hours = parseInt(ev.target.value);
+							hours =
+								ev.target.value === ''
+									? hoursOriginal
+									: parseInt(ev.target.value);
 						}}
 						style="border: {hourBorder};"
 					/>
@@ -179,9 +186,12 @@
 						type="number"
 						oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"
 						maxlength="2"
-						placeholder={minutes}
+						placeholder={minutesOriginal}
 						on:input={ev => {
-							minutes = ev.target.value.toString().padStart(2, '0');
+							minutes =
+								ev.target.value === ''
+									? minutesOriginal
+									: ev.target.value.toString().padStart(2, '0');
 						}}
 						style="border: {minBorder};"
 					/>
