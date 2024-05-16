@@ -127,6 +127,11 @@
 		}
 	}
 
+	function cancelDateEditing() {
+		editing.set(false);
+		editingDate = false;
+	}
+
 	function cancelTimeEditing() {
 		editing.set(false);
 		editingTime = false;
@@ -177,10 +182,7 @@
 					style="width: 16px;"
 					src="./assets/cancel-icon.svg"
 					alt="Cancel Editing"
-					on:click={() => {
-						editing.set(false);
-						editingDate = false;
-					}}
+					on:click={cancelDateEditing}
 				/>
 			</div>
 		{:else}
