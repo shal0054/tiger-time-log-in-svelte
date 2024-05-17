@@ -26,8 +26,8 @@
 		text-align: center;
 		margin: 2rem auto;
 		border-radius: 50%;
-		height: 35vw;
-		width: 35vw;
+		height: 38vw;
+		width: 38vw;
 		font-size: x-large;
 		font-family: 'Moul', serif;
 		font-weight: 700;

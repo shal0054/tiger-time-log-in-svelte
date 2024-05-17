@@ -7,6 +7,7 @@
 	import SubmitModal from '../components/SubmitModal.svelte';
 	import Nav from '../components/Nav.svelte';
 	import BreakBtn from '../components/BreakBtn.svelte';
+	import DeleteBtn from '../components/DeleteBtn.svelte';
 	import { times, startTimer, editing } from '../stores';
 
 	let btnState = 'start'; // start | end | submit
@@ -77,7 +78,10 @@
 			{btnText}
 			{shadowColor}
 		/>
-		<BreakBtn {brkBtnDisabled} {brkBtnActive} />
+		<div class="sm-btn-container">
+			<BreakBtn {brkBtnDisabled} {brkBtnActive} />
+			<DeleteBtn delBtnDisabled={brkBtnDisabled} delBtnActive={brkBtnActive} />
+		</div>
 	</div>
 	<Nav {activeTab} on:tabChange={tabChange} />
 </main>
