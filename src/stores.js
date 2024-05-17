@@ -12,8 +12,8 @@ export const editing = writable(false);
 
 // simulated routing
 export const pages = writable({
-	loggedIn: false,
-	main: false,
+	loggedIn: true,
+	main: true,
 	history: false,
 	profile: false,
 	settings: false,
