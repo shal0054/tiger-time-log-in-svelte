@@ -19,6 +19,8 @@
 	let btnDisabled;
 	let brkBtnDisabled;
 	let brkBtnActive;
+	let delBtnDisabled;
+	let delBtnActive;
 
 	function tabChange(ev) {
 		activeTab = ev.detail;
@@ -39,6 +41,8 @@
 				btnState = 'end';
 				brkBtnActive = true;
 				brkBtnDisabled = false;
+				delBtnActive = true;
+				delBtnDisabled = false;
 				break;
 			case 'end':
 				startTimer.set(false);
@@ -58,8 +62,15 @@
 				btnText = 'Start Your Day';
 				// submitDay(); // submit to firebase and reset variables
 				btnState = 'start';
+				delBtnActive = false;
+				delBtnDisabled = true;
 				break;
 		}
+	}
+
+	function deleteDay() {
+		times.set({ dayStartTimeObj: '', dayEndTimeObj: '' });
+		btnState = 'start';
 	}
 </script>
 
@@ -80,7 +91,7 @@
 		/>
 		<div class="sm-btn-container">
 			<BreakBtn {brkBtnDisabled} {brkBtnActive} />
-			<DeleteBtn delBtnDisabled={brkBtnDisabled} delBtnActive={brkBtnActive} />
+			<DeleteBtn {delBtnDisabled} {delBtnActive} on:click={deleteDay} />
 		</div>
 	</div>
 	<Nav {activeTab} on:tabChange={tabChange} />
